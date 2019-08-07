@@ -13,7 +13,7 @@
             el-input( v-model="form.password" placeholder="密码")
           el-form-item
             el-input( v-model="form.code" placeholder="验证码")
-            rudy-captcha( class="captcha" width="100" font-family="迷你简菱心" :click-fresh="true")
+            rudy-captcha( class="captcha" :width="100" font-family="迷你简菱心" :click-fresh="true")
       button 登录
 </template>
 

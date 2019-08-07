@@ -2,8 +2,9 @@ import Vue from "vue";
 import Router from "vue-router";
 import Home from "@/views/Home.vue";
 import Login from "@/views/Login.vue";
-import DragonQuest from "@/views/dragonQuest.vue";
+import DragonQuestMonster from "@/views/dragonQuestMonster.vue";
 import DragonQuestProp from "@/views/dragonQuestProp.vue";
+import GitCommands from "@/views/gitCommands.vue";
 
 Vue.use(Router);
 
@@ -22,14 +23,19 @@ export default new Router({
       component: Home
     },
     {
-      path: "/dragonQuest",
-      name: "dragonQuest",
-      component: DragonQuest
+      path: "/dragonQuestMonster",
+      name: "dragonQuestMonster",
+      component: DragonQuestMonster
     },
     {
       path: "/dragonQuestProp",
       name: "dragonQuestProp",
       component: DragonQuestProp
+    },
+    {
+      path: "/gitCommands",
+      name: "gitCommands",
+      component: GitCommands
     },
     {
       path: "/about",

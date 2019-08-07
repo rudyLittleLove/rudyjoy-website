@@ -1,18 +1,13 @@
 <template lang="pug">
   .table-wrap
-    button( @click="switchTypeHandle") switch {{type}}
     div( @scroll="scrollHandle")
-      table( v-if="type === 'list'")
+      table( v-if="type === 'list'" cellspacing="0" cellpadding="0" border="0")
         colgroup
-          col( width="80")
-          col( width="217")
-          col( width="217")
-          col( width="217")
-          col( width="217")
-          col( width="217")
+          col( width="80px")
         thead
           tr
-            th 图片
+            th
+              span.width-80 图片
             th 名称
             th 普通掉落
             th 稀有掉落
@@ -50,7 +45,9 @@
         :page-size="pageSize"
         layout="total, sizes, prev, pager, next, jumper"
         :total="total")
+      el-button( type="success" size="mini" @click="switchTypeHandle" class="switch-button") 切换 {{type}}
       el-input( v-model="searchVal" @keyup.native.enter="calcList" size="mini" placeholder="请输入搜索值，回车确认")
+        el-button( slot="append" icon="el-icon-search" @click="calcList")
 </template>
 
 <script>
@@ -114,7 +111,7 @@ export default {
     },
     calcList() {
       let filterData = this.calcPage(this.data, this.pageNum, this.pageSize, {
-        key: ["name", "ordinaryDrop", "rareDrop", "description"],
+        key: ["name", "ordinaryDrop", "rareDrop", "description", "address"],
         val: this.searchVal
       });
       this.dataList = filterData.data;
@@ -190,17 +187,18 @@ export default {
     content ''
     display block
     clear both
-  > button
-    position fixed
-    top 50%
-    right calc(50% - 700px)
-    border 1px solid #ccc
-    padding 3px 5px
-    margin-top 5px
-    border-radius 3px
-    background-color cornsilk
+  // > button
+  //   position fixed
+  //   top 50%
+  //   right calc(50% - 700px)
+  //   border 1px solid #ccc
+  //   padding 3px 5px
+  //   margin-top 5px
+  //   border-radius 3px
+  //   background-color cornsilk
   table
     table-layout fixed
+    width 100%
     thead
       padding 0
       position fixed
@@ -212,23 +210,28 @@ export default {
       text-align left
       height 25px
       line-height 25px
-      width 217px
+      width 222px
       background-color #fff
+      .width-80
+        display block
+        width 80px
       &:nth-child(1)
         width 80px
     tbody
       img
         width 80px
         height 80px
+      td
+        border-bottom 1px solid #EBEEF5
       tr:nth-child(1)
         td
           padding-top 30px
       tr:nth-child(2n -1)
         td
-          background-color rgba(0, 25, 200,.1)
-      tr:nth-child(2n)
-        td
-          background-color rgba(0, 0, 0,.1)
+          background-color #f5f7fa
+      // tr:nth-child(2n)
+      //   td
+      //     background-color rgba(122, 23, 111,.1)
   .item-wrap
     padding-left 10px
     img
@@ -253,29 +256,39 @@ export default {
   .page-wrap
     height 50px
     margin auto
+    .el-pagination
+      float left
     .el-input
       float right
       width 250px
-      margin-top -28px
+      margin-top 5px
+    .switch-button
+      float right
+      margin 5px 10px
 @media (max-width: 1200px)
   .table-wrap
     width 100%
     > button
-      top calc(100% - 40px)
-      right 50px
+      position visible
     > div
       height calc(100% - 80px)
     .item-wrap
       li
-        width calc(100% / 2)
+        width calc(100% / 3)
     .page-wrap
       height 80px
+      .el-pagination
+        float none
       .el-input
-        margin-top 10px
         float left
+@media (max-width: 900px)
+  .table-wrap
+    .item-wrap
+      li
+        width calc(100% / 2)
 @media (max-width: 600px)
   .table-wrap
-    min-width 400px
+    min-width 360px
     .item-wrap
       li
         width calc(100% / 1)

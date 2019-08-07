@@ -1,10 +1,8 @@
 <template lang="pug">
   .home
     div.button-group
-      el-button( @click="loginHandle" type="primary" size="mini") 登录
-      el-button( @click="transitionHandle" type="primary" size="mini") 动画
-      el-button( @click="dragonQuestHandle" type="primary" size="mini") 勇者斗恶龙11 怪兽大全
-      el-button( @click="dragonQuestPropHandle" type="primary" size="mini") 勇者斗恶龙11 道具大全
+      el-button( v-for="item in routerLinks" @click="toRouterHandle(item.path)" type="primary" size="mini") {{item.label}}
+      el-button( @click="transitionHandle" type="success" size="mini") 动画
     transition( name="fade")
       .wrap( v-show="isShow")
 </template>
@@ -15,18 +13,30 @@ export default {
   components: {},
   data() {
     return {
-      isShow: true
+      isShow: true,
+      routerLinks: [
+        {
+          label: "登录",
+          path: "/login"
+        },
+        {
+          label: "勇者斗恶龙11 怪兽大全",
+          path: "/dragonQuestMonster"
+        },
+        {
+          label: "勇者斗恶龙11 道具大全",
+          path: "/dragonQuestProp"
+        },
+        {
+          label: "git 常用命令",
+          path: "/gitCommands"
+        }
+      ]
     };
   },
   methods: {
-    loginHandle() {
-      this.$router.push("/login");
-    },
-    dragonQuestHandle() {
-      this.$router.push("/dragonQuest");
-    },
-    dragonQuestPropHandle() {
-      this.$router.push("/dragonQuestProp");
+    toRouterHandle(path) {
+      this.$router.push(path);
     },
     transitionHandle() {
       this.isShow = !this.isShow;
@@ -69,18 +79,8 @@ export default {
   width 700px
   margin auto
   height 100%
-  background-image linear-gradient(90deg, #000000 0%, #000000 100%)
-  background-repeat no-repeat
-  background-size 100px 1px
-  background-position 0 0
-  animation moveLine 12s infinite linear
   .wrap
     width 200px
     height 100px
     background-color #acd3f0
-@keyframes moveLine
-  from
-    background-position -100px 0
-  to
-    background-position calc(100% + 100px) 0
 </style>
