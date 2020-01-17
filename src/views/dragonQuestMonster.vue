@@ -1,6 +1,6 @@
 <template lang="pug">
   .table-wrap
-    div( @scroll="scrollHandle")
+    div
       table( v-if="type === 'list'" cellspacing="0" cellpadding="0" border="0")
         colgroup
           col( width="80px")
@@ -16,7 +16,9 @@
         tbody
           tr( v-for="item in dataList")
             td
-              img( ref="img" :src="item.imgSrc" :listen="listen")
+              el-image( class="el-img" :key="item.imgSrc" :src="item.url && require('../../static/yzdel/' + item.url)" :preview-src-list="item.urlList || []" lazy)
+                div( slot="error")
+                  i.el-icon-picture-outline
             td
               span {{item.name}}
             td
@@ -29,13 +31,17 @@
               span {{item.description}}
       ul.item-wrap( v-else)
         li( v-for="(item, i) in dataList")
-          img( ref="img" :src="item.imgSrc" :listen="listen")
-          span No: {{item.No}}
-          span 名称：{{item.name}}
-          span 普通掉落：{{item.ordinaryDrop}}
-          span 稀有掉落：{{item.rareDrop}}
-          span 出现地点：{{item.address}}
-          span 备注：{{item.description}}
+          .marquee-line
+            //- img( ref="img" :src="item.imgSrc" :listen="listen")
+            el-image( class="el-img" :key="item.imgSrc" :src="item.url && require('../../static/yzdel/' + item.url)" :preview-src-list="item.urlList || []" lazy)
+              div( slot="error")
+                i.el-icon-picture-outline
+            span No: {{item.No}}
+            span 名称：{{item.name}}
+            span 普通掉落：{{item.ordinaryDrop}}
+            span 稀有掉落：{{item.rareDrop}}
+            span 出现地点：{{item.address}}
+            span 备注：{{item.description}}
     div.page-wrap
       el-pagination(
         @size-change="handleSizeChange"
@@ -45,7 +51,7 @@
         :page-size="pageSize"
         layout="total, sizes, prev, pager, next, jumper"
         :total="total")
-      el-button( type="success" size="mini" @click="switchTypeHandle" class="switch-button") 切换 {{type}}
+      el-button( type="success" size="mini" @click="switchTypeHandle" class="switch-button") 切换视图
       el-input( v-model="searchVal" @keyup.native.enter="calcList" size="mini" placeholder="请输入搜索值，回车确认")
         el-button( slot="append" icon="el-icon-search" @click="calcList")
 </template>
@@ -77,25 +83,25 @@ export default {
   },
   mounted() {},
   methods: {
-    scrollHandle() {
-      clearTimeout(this.timer);
-      this.timer = setTimeout(() => {
-        var wh = window.innerHeight;
-        this.dataList.forEach(item => {
-          var top = item.dom.getBoundingClientRect().top;
-          if (top > -80 && top < wh && !item.imgSrc) {
-            item.imgSrc = item.url && require("../../static/yzdel/" + item.url);
-          }
-        });
-        this.listen = !this.listen;
-      }, 200);
-    },
+    // scrollHandle() {
+    //   clearTimeout(this.timer);
+    //   this.timer = setTimeout(() => {
+    //     var wh = window.innerHeight;
+    //     this.dataList.forEach(item => {
+    //       var top = item.dom.getBoundingClientRect().top;
+    //       if (top > -80 && top < wh && !item.imgSrc) {
+    //         item.imgSrc = item.url && require("../../static/yzdel/" + item.url);
+    //       }
+    //     });
+    //     this.listen = !this.listen;
+    //   }, 200);
+    // },
     switchTypeHandle() {
       this.type = this.type === "list" ? "item" : "list";
-      this.assignmentImg();
-      this.$nextTick(() => {
-        this.scrollHandle();
-      });
+      // this.assignmentImg();
+      // this.$nextTick(() => {
+      //   this.scrollHandle();
+      // });
     },
     // getPositionHandle(item) {
     //   return require("../../static/yzdel/" + item.url);
@@ -114,22 +120,33 @@ export default {
         key: ["name", "ordinaryDrop", "rareDrop", "description", "address"],
         val: this.searchVal
       });
-      this.dataList = filterData.data;
+      this.dataList = filterData.data.map((item, i) => {
+        let urlList = filterData.data.map(
+          e =>
+            e.url &&
+            require(`../../static/yzdel old/${e.url.replace(".gif", ".jpg")}`)
+        );
+        item.urlList = [
+          ...urlList.slice(i, this.pageSize),
+          ...urlList.slice(0, i)
+        ];
+        return item;
+      });
       this.pageNum = filterData.pageNum;
       this.total = filterData.count;
-      this.$nextTick(() => {
-        this.assignmentImg();
-        this.scrollHandle();
-      });
+      // this.$nextTick(() => {
+      //   this.assignmentImg();
+      //   this.scrollHandle();
+      // });
     },
-    assignmentImg() {
-      var imgs = this.$refs.img;
-      this.dataList = this.dataList.map((v, i) => {
-        v.dom = imgs[i];
-        v.imgSrc = "";
-        return v;
-      });
-    },
+    // assignmentImg() {
+    //   var imgs = this.$refs.img;
+    //   this.dataList = this.dataList.map((v, i) => {
+    //     v.dom = imgs[i];
+    //     v.imgSrc = "";
+    //     return v;
+    //   });
+    // },
     calcPage(data, num, size, searchObj, xor) {
       // 浅拷贝data
       let filterData = Object.assign([], data);
@@ -180,6 +197,17 @@ export default {
   width 1200px
   margin auto
   height 100%
+  .el-img
+    width 80px
+    height 80px
+    background-image linear-gradient(-45deg, #f5f7fa 0%, #cccccc 25%, transparent 25%, transparent 50%,#f5f7fa 50%, #cccccc 75%, transparent 75%, transparent 100%)
+    background-size 15px 15px
+    text-align center
+    .el-icon-picture-outline
+      font-size 30px
+      line-height 80px
+      vertical-align middle
+      color #909399
   > div
     overflow auto
     height calc(100% - 50px)
@@ -202,6 +230,7 @@ export default {
     thead
       padding 0
       position fixed
+      z-index 1
       top 0
       background-color #fff
       box-shadow 0 0 3px rgba(0, 0, 0, .3)
@@ -234,6 +263,10 @@ export default {
       //     background-color rgba(122, 23, 111,.1)
   .item-wrap
     padding-left 10px
+    .el-img
+      float left
+      margin-right 10px
+      margin-bottom 40px
     img
       width 80px
       height 80px
@@ -249,6 +282,10 @@ export default {
       background-color rgba(32,42,233, .1)
       padding-right 10px
       background-clip content-box
+      .marquee-line
+        width calc(100% - 2px)
+        background-image linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, orange 100%), linear-gradient(0deg, orange 0%, rgba(0, 0, 0, 0) 100%), linear-gradient(-90deg, rgba(0, 0, 0, 0) 0%, orange 100%), linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, orange 100%)
+        animation moveLine 4s infinite linear
       span
         display block
         line-height 20px
@@ -261,10 +298,10 @@ export default {
     .el-input
       float right
       width 250px
-      margin-top 5px
+      margin 5px 10px 0 0
     .switch-button
       float right
-      margin 5px 10px
+      margin 5px 10px 0 0
 @media (max-width: 1200px)
   .table-wrap
     width 100%
@@ -303,6 +340,17 @@ export default {
           display block
       .more
         display none
+    .el-pagination
+      padding 2px 2px
+      .el-select
+        .el-input
+          width 88px
+      .el-pagination__sizes
+        margin-right 0
+    .el-pagination button,
+    .el-pagination span:not([class*=suffix])
+    .el-pager li
+      min-width 20px
 @media (max-width: 600px)
   .table-wrap
     .el-pagination__jump

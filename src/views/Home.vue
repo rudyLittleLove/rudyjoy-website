@@ -30,6 +30,10 @@ export default {
         {
           label: "git 常用命令",
           path: "/gitCommands"
+        },
+        {
+          label: "方格动画",
+          path: "/rectRandom"
         }
       ]
     };
@@ -48,6 +52,11 @@ export default {
 .button-group
   padding-top 30px
   padding-bottom 30px
+  .el-button
+    margin-right 10px
+    margin-top 10px
+    &+.el-button
+      margin-left 0
 .fade-enter-active
 .fade-leave-active
   transition opacity 2s
@@ -83,4 +92,7 @@ export default {
     width 200px
     height 100px
     background-color #acd3f0
+@media (max-width: 600px)
+  .home
+    width 100%
 </style>

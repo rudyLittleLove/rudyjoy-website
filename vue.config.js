@@ -1,4 +1,5 @@
 const path = require("path");
+const CompressionWebpackPlugin = require('compression-webpack-plugin')
 // 作为配置文件，直接导出配置对象即可
 module.exports = {
   devServer: {
@@ -21,6 +22,19 @@ module.exports = {
       }
     }
   },
+  configureWebpack: config => {
+    // 开发环境不需要gzip
+    // if (process.env.NODE_ENV !== 'production') return
+    config.plugins.push(
+      new CompressionWebpackPlugin({
+        // 正在匹配需要压缩的文件后缀
+        test: /\.(js|css|svg|woff|ttf|json|html)$/,
+        // 大于10kb的会压缩
+        threshold: 10240
+        // 其余配置查看compression-webpack-plugin
+      })
+    )
+  },
   chainWebpack: config => {
     const imagesRule = config.module.rule("images");
     imagesRule
@@ -30,10 +44,10 @@ module.exports = {
         bypassOnDebug: true
       })
       .end();
-    // config.module
-    //   .rule("images")
-    //   .use("url-loader")
-    //   .loader("url-loader")
-    //   .tap(options => Object.assign(options, { limit: 20480 }));
+    config.module
+      .rule("images")
+      .use("url-loader")
+      .loader("url-loader")
+      .tap(options => Object.assign(options, { limit: 2048 }));
   }
 };
