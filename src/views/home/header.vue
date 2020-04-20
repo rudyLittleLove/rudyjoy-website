@@ -22,6 +22,9 @@ export default {
     }
   },
   data() {
+    // 下方为字库已取中文，如果要添加，需要编辑字库
+
+    // 简单聊博文详情客信息掘金个人社交武器库工具游戏勇者斗恶龙
     return {
       showMenu: false,
       menuData: [
