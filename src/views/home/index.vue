@@ -186,7 +186,7 @@ export default {
       left -37px
       transform rotate(0deg)
       animation upDow 3s infinite
-      cursor crosshair
+      cursor pointer
   .container-wrap
     position absolute
     // height 100vh

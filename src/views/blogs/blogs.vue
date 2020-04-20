@@ -1,19 +1,19 @@
 <template lang="pug">
-.blogs-wrap
-  .blogs-catalog( :class="{close: closeMenu}" @click="closeMenu = !closeMenu")
+reactive-panel
+  template( v-slot:catalog)
     h3.title 文章目录
     ul.blogs-ul
       li( v-for="(item, i) in catalogs")
         span( @click="html = item.html") {{ i+1 }}. {{ item.label }}
-  div.content
+  template( v-slot:content)
     iframe( ref="iframe")
 </template>
 
 <script>
-// import marquee from "../../../public/htmlFile/marquee.html";
-// import html from "../../../static/htmlFile/marquee.html";
+import ReactivePanel from "../components/reactive-panel";
 
 export default {
+  components: { ReactivePanel },
   data() {
     return {
       catalogs: [
@@ -71,8 +71,7 @@ export default {
           html: require("../../../static/htmlFile/vscode-style-edit.html")
         }
       ],
-      html: "",
-      closeMenu: true
+      html: ""
     };
   },
   watch: {
@@ -82,6 +81,14 @@ export default {
       this.addIframeStyle(
         html.documentElement,
         `
+        ::-webkit-scrollbar{
+          width: 7px;
+          height: 7px;
+        }
+        ::-webkit-scrollbar-thumb{
+          background-color: rgba(255, 255, 255, .2);
+          border-radius: 3px;
+        }
         body { color: #eeeeee }
         pre>code { background-color: rgba(255,255,255,.1) }
         h1:after, h2:after { border-color: rgba(255, 255, 255, .8) }
@@ -110,105 +117,27 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.blogs-wrap
-  width 1200px
-  max-width 100%
-  margin auto
-  font-size 16px
-  color #eeeeee
-  .blogs-catalog
-    background-repeat no-repeat
-    background-size 100% 1px, 1px 100%
-    background-image linear-gradient(90deg, #ffffff, rgba(9, 16, 26, 0)), linear-gradient(0deg, rgba(9, 16, 26, 0), #ffffff)
-    float left
-    width 300px
+.reactive-panel
+  .title
+    font-size 16px
+    padding 2px 5px
+  .blogs-ul
+    position relative
+    z-index 1
+    font-size 14px
+    height calc(100% - 25px)
     box-sizing border-box
-    // border 1px solid #cccccc
-    margin-right 10px
-    height calc(100vh - 53px)
-    .title
-      font-size 16px
+    overflow auto
+    padding-bottom 70px
+    > li
       padding 2px 5px
-    .blogs-ul
-      font-size 14px
-      height calc(100% - 25px)
-      box-sizing border-box
-      overflow auto
-      padding-bottom 70px
-      > li
-        padding 2px 5px
-        margin-top 10px
-        > span
-          cursor pointer
-          &:hover
-            text-decoration underline dashed
-  div.content
-    float left
-    width 890px
-    // border 1px solid #ccccc
-    background-repeat no-repeat
-    background-size 100% 1px, 1px 100%
-    background-image linear-gradient(90deg, #ffffff, rgba(9, 16, 26, 0)), linear-gradient(0deg, rgba(9, 16, 26, 0), #ffffff)
-    box-sizing border-box
-    font-size 0
+      margin-top 10px
+      > span
+        cursor pointer
+        &:hover
+          text-decoration underline dashed
+  iframe
     min-height calc(100vh - 53px)
-    iframe
-      min-height calc(100vh - 53px)
-      border none
-      width 100%
-@media screen and (max-width 1270px)
-  .blogs-wrap
-    width 890px
-    .blogs-catalog
-      position absolute
-      top 50px
-      left 0
-      background-image linear-gradient(90deg, rgba(9, 16, 26, 0), #ffffff), linear-gradient(0deg, rgba(9, 16, 26, 0), #ffffff)
-      background-color rgba(9, 16, 26, .9)
-      background-position right top
-      height calc(100vh - 53px)
-      width 250px
-      transition margin-left .2s
-      z-index 5
-      &.close
-        margin-left -250px
-        &::before
-          transform rotate(0deg)
-          right -20px
-          // text-indent -17px
-      &::before
-        overflow hidden
-        // ◀
-        content '▶'
-        line-height 31px
-        width 20px
-        height 30px
-        background rgba(255, 255, 255, .5)
-        position absolute
-        right 0
-        top calc(50% - 15px)
-        // border-radius 0 5px 5px 0
-        border-radius 2px
-        transform rotate(180deg)
-        // word-spacing 1px
-        white-space nowrap
-        text-indent 2px
-        transition text-indent .2s
-      &:not(.close)
-        &::after
-          content ''
-          position absolute
-          left 0
-          top -50px
-          bottom 0
-          width 10000px
-          background-image linear-gradient(90deg, transparent 250px, rgba(255, 255, 255, .2) 250px), linear-gradient(180deg, rgba(255, 255, 255, .2) 50px, transparent 50px)
-          background-size 100% 100%, 250px 50px
-          background-repeat no-repeat
-      .blogs-ul
-        position relative
-        z-index 1
-    div.content
-      background-image none
-      max-width 100%
+    border none
+    width 100%
 </style>
