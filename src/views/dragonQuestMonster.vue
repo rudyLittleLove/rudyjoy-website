@@ -31,7 +31,7 @@
               span {{item.description}}
       ul.item-wrap( v-else)
         li( v-for="(item, i) in dataList")
-          .marquee-line
+          div
             //- img( ref="img" :src="item.imgSrc" :listen="listen")
             el-image( class="el-img" :key="item.imgSrc" :src="item.url && require('../../static/yzdel/' + item.url)" :preview-src-list="item.urlList || []" lazy)
               div( slot="error")
@@ -194,9 +194,10 @@ export default {
 </script>
 <style lang="stylus" scoped>
 .table-wrap
-  width 1200px
+  width 100%
   margin auto
   height 100%
+  font-size 16px
   .el-img
     width 80px
     height 80px
@@ -228,19 +229,19 @@ export default {
     table-layout fixed
     width 100%
     thead
-      padding 0
-      position fixed
-      z-index 1
-      top 0
-      background-color #fff
+      // padding 0
+      // position fixed
+      // z-index 1
+      // top 0
+      color #FFFFFF
       box-shadow 0 0 3px rgba(0, 0, 0, .3)
     th
-      padding 0
+      padding 5px
       text-align left
       height 25px
       line-height 25px
-      width 222px
-      background-color #fff
+      // width 222px
+      background-color rgba(0, 0, 0, .5)
       .width-80
         display block
         width 80px
@@ -252,12 +253,16 @@ export default {
         height 80px
       td
         border-bottom 1px solid #EBEEF5
-      tr:nth-child(1)
-        td
-          padding-top 30px
+        padding 3px 5px
+      // tr:nth-child(1)
+      //   td
+      //     padding-top 30px
+      tr
+        td:nth-child(1)
+          padding-left 0
       tr:nth-child(2n -1)
         td
-          background-color #f5f7fa
+          background-color rgba(0, 0, 0, .3)
       // tr:nth-child(2n)
       //   td
       //     background-color rgba(122, 23, 111,.1)
@@ -276,10 +281,13 @@ export default {
     li
       height 120px
       float left
-      width calc(100% / 4)
+      width calc(100% / 3)
       box-sizing border-box
       margin-top 10px
-      background-color rgba(32,42,233, .1)
+      // background-color rgba(32,42,233, .1)
+      background-color rgba(255, 255, 255, .2)
+      overflow hidden
+      border-radius 2px
       padding-right 10px
       background-clip content-box
       .marquee-line
@@ -291,17 +299,18 @@ export default {
         line-height 20px
         font-size 14px
   .page-wrap
-    height 50px
-    margin auto
+    height 80px
+    margin 10px auto 70px
     .el-pagination
-      float left
+      float none
     .el-input
-      float right
+      float left
       width 250px
       margin 5px 10px 0 0
     .switch-button
       float right
       margin 5px 10px 0 0
+      padding 6px 5px
 @media (max-width: 1200px)
   .table-wrap
     width 100%
@@ -312,12 +321,12 @@ export default {
     .item-wrap
       li
         width calc(100% / 3)
-    .page-wrap
-      height 80px
-      .el-pagination
-        float none
-      .el-input
-        float left
+    // .page-wrap
+    //   height 80px
+    //   .el-pagination
+    //     float none
+    //   .el-input
+    //     float left
 @media (max-width: 900px)
   .table-wrap
     .item-wrap
@@ -325,7 +334,7 @@ export default {
         width calc(100% / 2)
 @media (max-width: 600px)
   .table-wrap
-    min-width 360px
+    min-width 300px
     .item-wrap
       li
         width calc(100% / 1)

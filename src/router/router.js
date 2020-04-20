@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "@/views/Home.vue";
-import Login from "@/views/Login.vue";
+import Home from "@/views/home/index.vue";
+// import Login from "@/views/Login.vue";
 // import DragonQuestMonster from "@/views/dragonQuestMonster.vue";
 // import DragonQuestProp from "@/views/dragonQuestProp.vue";
 // import GitCommands from "@/views/gitCommands.vue";
@@ -9,45 +9,55 @@ import Login from "@/views/Login.vue";
 Vue.use(Router);
 
 export default new Router({
-  // mode: "history",
+  mode: "history",
   base: process.env.BASE_URL,
   routes: [
-    {
-      path: "/login",
-      name: "login",
-      component: Login
-    },
+    // {
+    //   path: "/login",
+    //   name: "login",
+    //   component: Login
+    // },
     {
       path: "/",
-      name: "home",
-      component: Home
-    },
-    {
-      path: "/dragonQuestMonster",
-      name: "dragonQuestMonster",
-      component: () =>
-        import(/* webpackChunkName: "DragonQuestMonster" */ "@/views/dragonQuestMonster.vue")
-    },
-    {
-      path: "/dragonQuestProp",
-      name: "dragonQuestProp",
-      component: () =>
-        import(/* webpackChunkName: "DragonQuestProp" */ "@/views/dragonQuestProp.vue")
+      name: "index",
+      redirect: "/baseInfo",
+      component: Home,
+      children: [
+        {
+          path: "/baseInfo",
+          name: "baseInfo",
+          component: () => import("@/views/home/baseInfo.vue")
+        },
+        {
+          path: "/blogs",
+          name: "blogs",
+          component: () => import("@/views/blogs/blogs.vue")
+        },
+        {
+          path: "/games",
+          name: "games",
+          redirect: "/games/dragonQuestMonster",
+          component: () => import("@/views/games/games.vue"),
+          children: [
+            {
+              path: "/games/dragonQuestMonster",
+              name: "dragonQuestMonster",
+              component: () => import("@/views/dragonQuestMonster.vue")
+            },
+            {
+              path: "/games/dragonQuestProp",
+              name: "dragonQuestProp",
+              component: () => import("@/views/dragonQuestProp.vue")
+            }
+          ]
+        }
+      ]
     },
     {
       path: "/gitCommands",
       name: "gitCommands",
       component: () =>
         import(/* webpackChunkName: "GitCommands" */ "@/views/gitCommands.vue")
-    },
-    {
-      path: "/about",
-      name: "about",
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () =>
-        import(/* webpackChunkName: "about" */ "@/views/About.vue")
     },
     {
       path: "/rectRandom",

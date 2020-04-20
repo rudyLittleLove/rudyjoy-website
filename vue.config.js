@@ -1,10 +1,10 @@
 const path = require("path");
-const CompressionWebpackPlugin = require('compression-webpack-plugin')
+const CompressionWebpackPlugin = require("compression-webpack-plugin");
 // 作为配置文件，直接导出配置对象即可
 module.exports = {
   devServer: {
     // 设置主机地址
-    host: "localhost",
+    host: "192.168.155.1",
     // 设置默认端口
     port: 8080,
     // 设置代理
@@ -24,7 +24,7 @@ module.exports = {
   },
   configureWebpack: config => {
     // 开发环境不需要gzip
-    // if (process.env.NODE_ENV !== 'production') return
+    if (process.env.NODE_ENV !== "production") return;
     config.plugins.push(
       new CompressionWebpackPlugin({
         // 正在匹配需要压缩的文件后缀
@@ -33,17 +33,24 @@ module.exports = {
         threshold: 10240
         // 其余配置查看compression-webpack-plugin
       })
-    )
+    );
   },
   chainWebpack: config => {
-    const imagesRule = config.module.rule("images");
-    imagesRule
-      .use("image-webpack-loader")
-      .loader("image-webpack-loader")
-      .options({
-        bypassOnDebug: true
-      })
-      .end();
+    // const imagesRule = config.module.rule("images");
+    // imagesRule
+    //   .use("image-webpack-loader")
+    //   .loader("image-webpack-loader")
+    //   .options({
+    //     bypassOnDebug: true
+    //   })
+    //   .end();
+
+    config.module
+      .rule("html")
+      .test(/\.html$/)
+      .use("html-loader")
+      .loader("html-loader");
+
     config.module
       .rule("images")
       .use("url-loader")
