@@ -7,10 +7,16 @@ class circle {
     this.ctx = this.canvas.getContext("2d");
 
     // 创建随机状态小球
-    this.arr = Array.from(new Array(setting.num)).map(() => ({
+    this.arr = Array.from(
+      new Array(
+        Math.round(
+          setting.num || (this.canvas.width * this.canvas.height) / 10000
+        )
+      )
+    ).map(() => ({
       x: Math.random() * this.canvas.width,
       y: Math.random() * this.canvas.height,
-      speed: Math.random() * 1.5 + 0.5,
+      speed: Math.random() * 0.4 + 0.1,
       xDir: Math.random() > 0.5 ? -1 : 1,
       yDir: Math.random() > 0.5 ? -1 : 1,
       r: 2
@@ -20,11 +26,13 @@ class circle {
 
     this.animation();
 
-    // window.onresize = () => {
-    //   this.canvas.width = document.documentElement.clientWidth;
-    //   this.canvas.height = document.documentElement.clientHeight;
-    // };
+    window.addEventListener("resize", this.resizeHandler);
   }
+  resizeHandler = () => {
+    this.canvas.width = document.documentElement.clientWidth;
+    this.canvas.height = document.documentElement.clientHeight;
+  };
+
   // 计算小球位置并判断方向与绘制
   drawCircle() {
     this.arr.forEach(item => {
@@ -89,11 +97,12 @@ class circle {
     this.drawLine();
     this.timer = setTimeout(() => {
       this.animation();
-    }, 30);
+    }, 1000 / 60);
   }
 
   distory() {
     clearTimeout(this.timer);
+    window.removeEventListener("resize", this.resizeHandler);
     this.canvas.remove();
   }
 }

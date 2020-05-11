@@ -76,7 +76,7 @@ export default {
         this.warpdrive.distory();
         delete this.warpdrive;
         this.circle = new circle(this.$refs.wrap, {
-          num: 100,
+          // num: 50,
           width: this.$refs.wrap.clientWidth,
           height: this.$refs.wrap.clientHeight
         });

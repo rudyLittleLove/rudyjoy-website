@@ -892,6 +892,7 @@ export default function(element, params) {
 
   this.distory = function(){
     paused = true
+    window.removeEventListener("resize", this.resizeHandler);
     canvas.remove()
   };
 
