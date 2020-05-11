@@ -16,8 +16,9 @@
 </template>
 
 <script>
-import warpdrive from "../../assets/js/warpdrive.js";
+import warpdrive from "@/assets/js/warpdrive.js";
 import WebHeader from "@/views/home/header.vue";
+import circle from "@/assets/js/circleConnect.js";
 
 export default {
   name: "home",
@@ -34,14 +35,17 @@ export default {
       targetX: 0,
       targetY: 0,
       warpdrive: "",
+      circle: "",
       showHeader: true,
       scrollTop: 0,
       showAudio: true
     };
   },
   mounted() {
-    this.inintWarpdrive();
-
+    this.initBgAnimation();
+    setInterval(() => {
+      this.initBgAnimation();
+    }, 1000 * 30);
     // this.$refs.audio.play();
   },
   computed: {
@@ -54,26 +58,40 @@ export default {
       this.showHeader = !(this.scrollTop < e.target.scrollTop);
       this.scrollTop = e.target.scrollTop;
     },
-    inintWarpdrive() {
+    initBgAnimation() {
       // window.addEventListener("mouseup", this.removeEventListenerHandle);
 
       // window.addEventListener("touchend", this.removeEventListenerHandle);
 
       // window.addEventListener("resize", this.resizeHandle);
-      this.warpdrive =
-        this.warpdrive ||
-        new warpdrive(this.$refs.wrap, {
+      if (this.warpdrive) {
+        this.warpdrive.distory();
+        delete this.warpdrive;
+        this.circle = new circle(this.$refs.wrap, {
+          num: 100,
           width: this.$refs.wrap.clientWidth,
-          height: this.$refs.wrap.clientHeight,
-          autoResize: true,
-          addMouseControls: false,
-          addTouchControls: false,
-          starCount:
-            (this.$refs.wrap.clientWidth * this.$refs.wrap.clientHeight) /
-            (!!window.ActiveXObject || "ActiveXObject" in window ? 2000 : 1000),
-          starBgCount: 0,
-          starfieldBackgroundColor: { r: 28, g: 39, b: 59 }
+          height: this.$refs.wrap.clientHeight
         });
+      } else {
+        this.circle && this.circle.distory();
+        console.log(this.$refs.wrap);
+        this.warpdrive =
+          this.warpdrive ||
+          new warpdrive(this.$refs.wrap, {
+            width: this.$refs.wrap.clientWidth,
+            height: this.$refs.wrap.clientHeight,
+            autoResize: true,
+            addMouseControls: false,
+            addTouchControls: false,
+            starCount:
+              (this.$refs.wrap.clientWidth * this.$refs.wrap.clientHeight) /
+              (!!window.ActiveXObject || "ActiveXObject" in window
+                ? 2000
+                : 1000),
+            starBgCount: 0,
+            starfieldBackgroundColor: { r: 28, g: 39, b: 59 }
+          });
+      }
 
       // box.addEventListener("mousedown", this.addEventListenerHandle);
 

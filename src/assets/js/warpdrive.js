@@ -890,6 +890,10 @@ export default function(element, params) {
     paused = false;
   };
 
+  this.distory = function(){
+    canvas.remove()
+  };
+
   //---
 
   init();
