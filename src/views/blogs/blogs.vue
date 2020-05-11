@@ -69,6 +69,15 @@ export default {
         {
           label: "vscode 自定义编辑器样式 CSS修改",
           html: require("../../../static/htmlFile/vscode-style-edit.html")
+        },
+        {
+          label:
+            "vue中 iframe 引入 本地静态html文件，vue-cli2与vue-cli3引用的差异",
+          html: require("../../../static/htmlFile/iframe-load.html")
+        },
+        {
+          label: "canvas 绘制特效 小球连接线动画",
+          html: require("../../../static/htmlFile/circle-connect.html")
         }
       ],
       html: ""

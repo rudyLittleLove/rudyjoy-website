@@ -69,7 +69,8 @@ export default {
           addMouseControls: false,
           addTouchControls: false,
           starCount:
-            (this.$refs.wrap.clientWidth * this.$refs.wrap.clientHeight) / 1000,
+            (this.$refs.wrap.clientWidth * this.$refs.wrap.clientHeight) /
+            (!!window.ActiveXObject || "ActiveXObject" in window ? 2000 : 1000),
           starBgCount: 0,
           starfieldBackgroundColor: { r: 28, g: 39, b: 59 }
         });
