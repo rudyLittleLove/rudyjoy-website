@@ -891,6 +891,7 @@ export default function(element, params) {
   };
 
   this.distory = function(){
+    paused = true
     canvas.remove()
   };
 

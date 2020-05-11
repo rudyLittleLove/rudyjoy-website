@@ -1,5 +1,5 @@
 <template lang="pug">
-.home-wrap( ref="wrap")
+.home-wrap( ref="wrap" @click="switchBgHandle")
   .container-wrap.marquee-line
     web-header( :show-header="showHeader")
     .show-audio( :class="{close: !showAudio}")
@@ -38,14 +38,16 @@ export default {
       circle: "",
       showHeader: true,
       scrollTop: 0,
-      showAudio: true
+      showAudio: true,
+      clickNumber: 0
     };
   },
   mounted() {
     this.initBgAnimation();
-    setInterval(() => {
-      this.initBgAnimation();
-    }, 1000 * 30);
+    // this.initBgAnimation();
+    // setInterval(() => {
+    //   this.initBgAnimation();
+    // }, 1000 * 30);
     // this.$refs.audio.play();
   },
   computed: {
@@ -54,6 +56,12 @@ export default {
     // }
   },
   methods: {
+    switchBgHandle() {
+      this.clickNumber++;
+      if (this.clickNumber % 5 === 0) {
+        this.initBgAnimation();
+      }
+    },
     scrollHandle(e) {
       this.showHeader = !(this.scrollTop < e.target.scrollTop);
       this.scrollTop = e.target.scrollTop;
@@ -74,7 +82,6 @@ export default {
         });
       } else {
         this.circle && this.circle.distory();
-        console.log(this.$refs.wrap);
         this.warpdrive =
           this.warpdrive ||
           new warpdrive(this.$refs.wrap, {

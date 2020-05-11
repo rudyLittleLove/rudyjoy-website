@@ -87,12 +87,13 @@ class circle {
     this.drawCircle();
     this.calcLine();
     this.drawLine();
-    setTimeout(() => {
+    this.timer = setTimeout(() => {
       this.animation();
     }, 30);
   }
 
   distory() {
+    clearTimeout(this.timer);
     this.canvas.remove();
   }
 }
