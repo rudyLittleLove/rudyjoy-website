@@ -78,6 +78,10 @@ export default {
         {
           label: "canvas 绘制特效 小球连接线动画",
           html: require("../../../static/htmlFile/circle-connect.html")
+        },
+        {
+          label: "使用canvas 如何绘制形状并支持拖拽、缩放功能",
+          html: require("../../../static/htmlFile/canvas-scale-offset.html")
         }
       ],
       html: ""
