@@ -82,6 +82,23 @@ export default {
         {
           label: "使用canvas 如何绘制形状并支持拖拽、缩放功能",
           html: require("../../../static/htmlFile/canvas-scale-offset.html")
+        },
+        {
+          label:
+            "elementUI el-form 组件 验证 提示不能为空，以及验证不生效的详细原因",
+          html: require("../../../static/htmlFile/el-form-valid.html")
+        },
+        {
+          label: "vue 组件选项的推荐顺序 与 自动排序",
+          html: require("../../../static/htmlFile/vue-prop-sort.html")
+        },
+        {
+          label: "删除列表中一个DOM，其余DOM动态过渡的方法",
+          html: require("../../../static/htmlFile/dom-transition.html")
+        },
+        {
+          label: "深入理解CSS之 如何使子元素撑宽 设置了 block 的父元素",
+          html: require("../../../static/htmlFile/strut-block-dom.html")
         }
       ],
       html: ""

@@ -20,7 +20,7 @@
 <script>
 import rudyCaptcha from "rudy-captcha";
 export default {
-  name: "login",
+  name: "Login",
   components: { rudyCaptcha },
   data() {
     return {
@@ -33,6 +33,7 @@ export default {
       }
     };
   },
+  watch: {},
   mounted() {
     this.canvasWidth = this.$refs.loginWrap.clientWidth;
     this.canvasHeight = this.$refs.loginWrap.clientHeight;

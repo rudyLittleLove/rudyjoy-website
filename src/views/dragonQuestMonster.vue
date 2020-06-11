@@ -60,7 +60,7 @@
 import rudyCaptcha from "rudy-captcha";
 import data from "../../static/monsterData";
 export default {
-  name: "login",
+  name: "Login",
   components: { rudyCaptcha },
   data() {
     return {

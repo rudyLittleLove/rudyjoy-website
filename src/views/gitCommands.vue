@@ -20,7 +20,7 @@
 <script>
 import gitData from "../../static/gitCommonds";
 export default {
-  name: "gitCommands",
+  name: "GitCommands",
   data() {
     return {
       gitData: gitData
