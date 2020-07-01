@@ -3,8 +3,8 @@ reactive-panel
   template( v-slot:catalog)
     h3.title 文章目录
     ul.blogs-ul
-      li( v-for="(item, i) in catalogs")
-        span( @click="html = item.html") {{ i+1 }}. {{ item.label }}
+      li( v-for="(item, i) in catalogs" :key="i" :class="{active: activeLabel === item.label}")
+        span( @click="targetHandle(item, i)") {{ i+1 }}. {{ item.label }}
   template( v-slot:content)
     iframe( ref="iframe")
 </template>
@@ -16,6 +16,7 @@ export default {
   components: { ReactivePanel },
   data() {
     return {
+      activeLabel: '',
       catalogs: [
         {
           label: "只需一个DOM，纯CSS实现线性跑马灯特效",
@@ -99,10 +100,21 @@ export default {
         {
           label: "深入理解CSS之 如何使子元素撑宽 设置了 block 的父元素",
           html: require("../../../static/htmlFile/strut-block-dom.html")
+        },
+        {
+          label: "遮罩覆盖的DOM，如果触发点击 等一系列事件",
+          html: require("../../../static/htmlFile/pointer-event.html")
         }
       ],
       html: ""
     };
+  },
+  beforeRouteUpdate(to, from, next) {
+    this.activeHandle(to.query.label)
+    next()
+  },
+  beforeRouteEnter (to, from, next) {
+    next()
   },
   watch: {
     html(val) {
@@ -128,9 +140,25 @@ export default {
     }
   },
   mounted() {
-    this.html = this.catalogs[0].html;
+    this.activeHandle(this.$route.query.label)
   },
   methods: {
+    activeHandle(label) {
+      let activeItem = this.catalogs.filter(item => item.label === label)[0] || this.catalogs[0]
+      
+      this.activeLabel = activeItem.label
+      this.html = activeItem.html
+      
+    },
+    targetHandle(item, i) {
+      // html = item.html
+      this.$router.push({
+        name: 'blogs',
+        query: {
+          label: item.label
+        }
+      })
+    },
     addIframeStyle(element, style) {
       var nod = document.createElement("style");
       nod.type = "text/css";
@@ -162,6 +190,8 @@ export default {
     > li
       padding 2px 5px
       margin-top 10px
+      &.active
+        color #0cb0e4
       > span
         cursor pointer
         &:hover
