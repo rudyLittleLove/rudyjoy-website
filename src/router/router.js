@@ -48,6 +48,12 @@ export default new Router({
               path: "/games/dragonQuestProp",
               name: "dragonQuestProp",
               component: () => import("@/views/dragonQuestProp.vue")
+            },
+            {
+              path: "/games/XuanYuanSwordStashes",
+              name: "XuanYuanSwordStashes",
+              component: () =>
+                import("@/views/games/components/XuanYuanSwordStashes.vue")
             }
           ]
         }

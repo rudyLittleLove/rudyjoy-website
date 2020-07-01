@@ -122,9 +122,7 @@ export default {
       });
       this.dataList = filterData.data.map((item, i) => {
         let urlList = filterData.data.map(
-          e =>
-            e.url &&
-            require(`../../static/yzdel old/${e.url.replace(".gif", ".jpg")}`)
+          e => e.url && require(`../../static/yzdel/${e.url}`)
         );
         item.urlList = [
           ...urlList.slice(i, this.pageSize),

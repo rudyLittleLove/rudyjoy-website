@@ -3,7 +3,7 @@ reactive-panel
   template( v-slot:catalog)
     h3.title 游戏资料目录
     ul.games-ul
-      li( v-for="(item, i) in catalogs")
+      li( v-for="(item, i) in catalogs" :class="{active: $route.name === item.routeName}")
         span( @click="$router.push({name: item.routeName})") {{ i+1 }}. {{ item.label }}
   template( v-slot:content)
     router-view
@@ -24,6 +24,10 @@ export default {
         {
           label: "勇者斗恶龙11 道具列表",
           routeName: "dragonQuestProp"
+        },
+        {
+          label: "轩辕剑之天之痕 隐藏道具位置",
+          routeName: "XuanYuanSwordStashes"
         }
       ]
     };
@@ -48,6 +52,8 @@ export default {
     > li
       padding 2px 5px
       margin-top 10px
+      &.active
+        color #0cb0e4
       > span
         cursor pointer
         &:hover

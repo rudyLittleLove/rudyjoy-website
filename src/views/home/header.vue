@@ -119,6 +119,10 @@ export default {
             {
               label: "勇者斗恶龙",
               routeName: "games"
+            },
+            {
+              label: "轩辕剑之天之痕",
+              routeName: "XuanYuanSwordStashes"
             }
           ]
         }

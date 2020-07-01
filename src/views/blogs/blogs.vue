@@ -16,7 +16,7 @@ export default {
   components: { ReactivePanel },
   data() {
     return {
-      activeLabel: '',
+      activeLabel: "",
       catalogs: [
         {
           label: "只需一个DOM，纯CSS实现线性跑马灯特效",
@@ -110,11 +110,11 @@ export default {
     };
   },
   beforeRouteUpdate(to, from, next) {
-    this.activeHandle(to.query.label)
-    next()
+    this.activeHandle(to.query.label);
+    next();
   },
-  beforeRouteEnter (to, from, next) {
-    next()
+  beforeRouteEnter(to, from, next) {
+    next();
   },
   watch: {
     html(val) {
@@ -140,24 +140,25 @@ export default {
     }
   },
   mounted() {
-    this.activeHandle(this.$route.query.label)
+    this.activeHandle(this.$route.query.label);
   },
   methods: {
     activeHandle(label) {
-      let activeItem = this.catalogs.filter(item => item.label === label)[0] || this.catalogs[0]
-      
-      this.activeLabel = activeItem.label
-      this.html = activeItem.html
-      
+      let activeItem =
+        this.catalogs.filter(item => item.label === label)[0] ||
+        this.catalogs[0];
+
+      this.activeLabel = activeItem.label;
+      this.html = activeItem.html;
     },
-    targetHandle(item, i) {
+    targetHandle(item) {
       // html = item.html
       this.$router.push({
-        name: 'blogs',
+        name: "blogs",
         query: {
           label: item.label
         }
-      })
+      });
     },
     addIframeStyle(element, style) {
       var nod = document.createElement("style");
