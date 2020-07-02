@@ -15,7 +15,7 @@
 <script>
 import propData from "../../static/propData";
 export default {
-  name: "dragonQuestProp",
+  name: "DragonQuestProp",
   data() {
     return {
       data: propData,

@@ -41,17 +41,20 @@ export default {
       &::placeholder
         color #FFF
   .content
-    padding 0 20px
+    padding 0 20px 80px
     ul
       display inline-block
     li
-      padding 5px
+      padding 5px 5px
+      margin 10px 0
+      background-color rgba(255, 255, 255, .1)
+      border-radius 5px
       h2
-        padding 5px 0
+        padding-bottom 5px
       p
-        line-height 1.3
+        line-height 1.5
         padding 2
-        font-size 14px
+        font-size 15px
 .el-select-dropdown__item
   line-height 1.4
   height auto
@@ -66,10 +69,4 @@ export default {
   &.selected
     a
       color #409EFF
-</style>
-
-<style lang="stylus">
-.stashes-popper {
-  font-size: 100px
-}
 </style>

@@ -28,6 +28,10 @@ export default {
         {
           label: "轩辕剑之天之痕 隐藏道具位置",
           routeName: "XuanYuanSwordStashes"
+        },
+        {
+          label: "轩辕剑之天之痕 炼妖表",
+          routeName: "XuanYuanSwordDevilPot"
         }
       ]
     };
