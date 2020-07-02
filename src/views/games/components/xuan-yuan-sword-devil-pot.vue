@@ -69,7 +69,9 @@ export default {
       this.value3 = result.length ? result[0].replace(search, "") : this.value3;
     },
     resizeWrapHandle() {
-      this.isInline = this.$refs.resize.offsetWidth > 880;
+      if(this.$refs.resize){
+        this.isInline = this.$refs.resize.offsetWidth > 880;
+      }
     }
   }
 };

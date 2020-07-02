@@ -8,7 +8,9 @@
       ul
         li( v-for="item,i in baseInfo" :key="i")
           h2( :id="item.title" ) {{item.title}}
-          p( v-for="item2,i2 in item.items" :key="i2") {{++i2}}. {{item2}}
+          p( v-for="item2,i2 in item.items" :key="i2") {{++i2}}. 
+            span {{item2.title}}
+            | {{item2.text}}
 </template>
 
 <script>
@@ -19,7 +21,7 @@ export default {
     return {
       title: "轩辕剑之天之痕 隐藏物品位置",
       active: "",
-      baseInfo: data
+      baseInfo: data,
     };
   }
 };
@@ -55,6 +57,9 @@ export default {
         line-height 1.5
         padding 2
         font-size 15px
+        span
+          color #0cb0e4
+          font-weight bold
 .el-select-dropdown__item
   line-height 1.4
   height auto

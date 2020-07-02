@@ -53,7 +53,7 @@ export default new Router({
               path: "/games/XuanYuanSwordStashes",
               name: "XuanYuanSwordStashes",
               component: () =>
-                import("@/views/games/components/XuanYuanSwordStashes.vue")
+                import("@/views/games/components/xuan-yuan-sword-stashes.vue")
             },
             {
               path: "/games/XuanYuanSwordDevilPot",

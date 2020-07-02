@@ -24,6 +24,8 @@ export default {
   font-size 16px
   color #eeeeee
   .reactive-catalog
+    position sticky
+    top 50px
     background-repeat no-repeat
     background-size 100% 1px, 1px 100%
     background-image linear-gradient(90deg, #ffffff, rgba(9, 16, 26, 0)), linear-gradient(0deg, rgba(9, 16, 26, 0), #ffffff)
@@ -33,7 +35,8 @@ export default {
     margin-right 10px
     height calc(100vh - 53px)
   div.content
-    float left
+    // float left
+    margin-left 300px
     width 890px
     background-repeat no-repeat
     background-size 100% 1px, 1px 100%
@@ -91,6 +94,7 @@ export default {
           background-size 100% 100%, 250px 50px
           background-repeat no-repeat
     div.content
+      margin-left 0
       background-image none
       max-width 100%
 </style>
