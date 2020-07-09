@@ -36,7 +36,7 @@ export default {
     height calc(100vh - 53px)
   div.content
     // float left
-    margin-left 300px
+    margin-left 310px
     width 890px
     background-repeat no-repeat
     background-size 100% 1px, 1px 100%
