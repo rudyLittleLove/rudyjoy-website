@@ -18,6 +18,7 @@
     p 还有个问题就是因为 IE不支持 object-fit 样式，用了其他hack样式，在.el-image 这个className上用非固定高度（min-height、max-height），hack的样式就会失效，有兴趣的同学可以去尝试一下。
     P 果然是人开发的就有bugヽ(￣▽￣)ﾉ
     p 2020-04-23 更新
+    p 注：添加jenkins 自动部署
 </template>
 
 <style lang="stylus" scoped>
