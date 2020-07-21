@@ -104,6 +104,10 @@ export default {
         {
           label: "遮罩覆盖的DOM，如果触发点击 等一系列事件",
           html: require("../../../static/htmlFile/pointer-event.html")
+        },
+        {
+          label: "iView DatePicker 组件 选择年_月 下拉框异常收缩",
+          html: require("../../../static/htmlFile/iViewDatePickerError.html")
         }
       ],
       html: ""
