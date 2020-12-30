@@ -76,6 +76,12 @@ export default new Router({
       name: "rectRandom",
       component: () =>
         import(/* webpackChunkName: "rectRandom" */ "@/views/rectRandom.vue")
+    },
+    {
+      path: "/dishes",
+      name: "dishes",
+      component: () =>
+        import(/* webpackChunkName: "dishes" */ "@/views/dishes/index.vue")
     }
   ]
 });
