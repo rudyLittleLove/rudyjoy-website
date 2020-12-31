@@ -17,8 +17,9 @@
         li( v-for="(item, i) in dishes" :key="i")
           h2 {{item.type}}
           div.list-wrap
-            el-checkbox( v-for="(item2, i2) in item.children" :key="`${i}.${i2}`" :label="`${item2.name} ${item2.price}`" ) {{item2.name}} 
-              span.price ￥{{item2.price}}
+            el-checkbox( v-for="(item2, i2) in item.children" :key="`${i}.${i2}`" :label="`${item2.name} ${item2.price}`" :class="{light: balance === +item2.price}") {{item2.name}} 
+              span.price( v-if="item2.name !== '炒时蔬'") ￥{{item2.price}}
+              el-input( v-else v-model="item2.price" size="mini")
     .right-box
       h2 已点菜品
       ul
@@ -29,7 +30,7 @@
         p 已点菜品金额 
           span ￥{{totaled}}
         p( :class="{danger: total < totaled}") 剩余金额 
-          span ￥{{total - totaled}}
+          span ￥{{balance}}
 </template>
 
 <script>
@@ -60,19 +61,33 @@ export default {
       return this.count / this.formData.tableNumber;
     },
     totaled() {
-      let arr = this.formData.checked.map(item => item.split(" ")[1]);
+      let arr = this.formData.checked.map(item => {
+        let arr = item.split(" ");
+        return arr[arr.length - 1];
+      });
 
       arr.push(0, 0);
 
       return arr.reduce((a, b) => +a + +b);
+    },
+    balance() {
+      return this.total - this.totaled;
     }
   },
   created() {
-    console.log(dishes);
+    this.dishes.forEach(item => {
+      item.children.sort((a, b) => (a.price >>> 0) - (b.price >>> 0));
+    });
   },
   methods: {}
 };
 </script>
+
+<style lang="css">
+.light > .el-checkbox__label {
+  color: orange;
+}
+</style>
 
 <style lang="stylus" scoped>
 .dishes-wrapper
@@ -98,6 +113,10 @@ export default {
     .el-checkbox
       min-width 180px
       padding: 5px 0
+      .el-input
+        width 80px
+        float right
+        margin-top -5px
       >>> .el-checkbox__label
         font-size 16px
         width calc(100% - 20px)
@@ -110,16 +129,20 @@ export default {
     position fixed
     top 50px
     left calc(50% + 530px)
-    overflow auto
+    // overflow auto
     padding-bottom 70px
     h2
       padding 5px
       text-align center
+    ul
+      height calc(100% - 40px)
+      overflow auto
     li
       font-size 14px
       padding 5px 10px
     .box
       position absolute
+      border-top 1px solid #eeeeee
       bottom 0
       width 100%
       box-sizing border-box
