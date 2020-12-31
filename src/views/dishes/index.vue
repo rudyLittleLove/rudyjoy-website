@@ -17,13 +17,14 @@
         li( v-for="(item, i) in dishes" :key="i")
           h2 {{item.type}}
           div.list-wrap
-            el-checkbox( v-for="(item2, i2) in item.children" :key="`${i}.${i2}`" :label="`${item2.name} ${item2.price}`" :class="{light: balance === +item2.price}") {{item2.name}} 
+            el-checkbox( v-for="(item2, i2) in item.children" :key="`${i}.${i2}`" :label="item2.id" :class="{light: balance === +item2.price}") {{item2.name}} 
               span.price( v-if="item2.name !== '炒时蔬'") ￥{{item2.price}}
               el-input( v-else v-model="item2.price" size="mini")
     .right-box
       h2 已点菜品
       ul
-        li( v-for="(item, i) in formData.checked") {{item.replace(' ',' ￥')}}
+        li( v-for="(item, i) in formData.checked") {{dishesObj[item].name}}
+          span ￥{{dishesObj[item].price}}
       .box
         p 每桌金额
           span ￥{{total}}
@@ -40,14 +41,15 @@ export default {
   name: "Dishes",
   data() {
     return {
-      dishes,
+      dishes: [],
       formData: {
         peopleNumber: 20,
         tableNumber: 2,
         price: 15,
         peoplePrice: 3,
         checked: []
-      }
+      },
+      dishesObj: {}
     };
   },
   computed: {
@@ -62,8 +64,7 @@ export default {
     },
     totaled() {
       let arr = this.formData.checked.map(item => {
-        let arr = item.split(" ");
-        return arr[arr.length - 1];
+        return this.dishesObj[item].price;
       });
 
       arr.push(0, 0);
@@ -75,8 +76,15 @@ export default {
     }
   },
   created() {
-    this.dishes.forEach(item => {
+    this.dishes = dishes.map(item => {
       item.children.sort((a, b) => (a.price >>> 0) - (b.price >>> 0));
+
+      item.children.map(v => {
+        v.id = (Math.random() * Math.pow(10, 10)) >>> 0;
+        this.dishesObj[v.id] = v;
+        return v;
+      });
+      return item;
     });
   },
   methods: {}
@@ -140,6 +148,8 @@ export default {
     li
       font-size 14px
       padding 5px 10px
+      span
+        float right
     .box
       position absolute
       border-top 1px solid #eeeeee
@@ -148,6 +158,8 @@ export default {
       box-sizing border-box
       font-size 14px
       padding 5px
+      p
+        padding 3px 0
       .danger
         color red
       span
