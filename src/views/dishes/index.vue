@@ -23,7 +23,7 @@
     .right-box
       h2 已点菜品
       ul
-        li( v-for="(item, i) in formData.checked") {{dishesObj[item].name}}
+        li( v-for="(item, i) in formData.checked" :key="i" @click="formData.checked.splice(i, 1)") {{dishesObj[item].name}}
           span ￥{{dishesObj[item].price}}
       .box
         p 每桌金额
@@ -148,6 +148,9 @@ export default {
     li
       font-size 14px
       padding 5px 10px
+      cursor url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAA7ElEQVQ4T7WUPQrCQBCF3zP+YGkECyt7b2ClTRQT7DyP8RA2niOC2ugdvIAgWAimV0lWRgkkmogrcZoZltlv3s7sLpGTMScO/g/ynb5KU2t6q9TimYrO9mAMhu04jApHc7GepxVIgHzbmoHsPBNVK71/3Ms6wUPNW46inHcQOAQhkG3GILpQ2JPcZYJk49mxXIKTrF5I7xTUtO6t3cSxX6vGQb7T35jeqic5UawNCsCeAbURL6AoFq+lKDdQpYzm5YpjKSg0CtWwGMU3IzxpKcqt2YR6TCWUKxMzmaiWok+P+SvQr7/B/1+/rrI7OduHE5n+jYMAAAAASUVORK5CYII='), no-drop
+      &:hover
+        box-shadow 0 0 3px rgba(255, 0, 0, 1) inset
       span
         float right
     .box
