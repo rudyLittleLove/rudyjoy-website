@@ -143,7 +143,7 @@ export default {
       padding 5px
       text-align center
     ul
-      height calc(100% - 40px)
+      height calc(100% - 50px)
       overflow auto
     li
       font-size 14px
