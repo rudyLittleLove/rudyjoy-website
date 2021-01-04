@@ -12,11 +12,12 @@ export default new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
-    // {
-    //   path: "/login",
-    //   name: "login",
-    //   component: Login
-    // },
+    {
+      path: "*",
+      name: "404",
+      component: () =>
+        import(/* webpackChunkName: "404" */ "@/views/home/404.vue")
+    },
     {
       path: "/",
       name: "index",
