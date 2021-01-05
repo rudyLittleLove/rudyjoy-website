@@ -1,5 +1,7 @@
-const path = require("path");
+// const path = require("path");
 const CompressionWebpackPlugin = require("compression-webpack-plugin");
+// const WebpackBundleAnalyzer = require("webpack-bundle-analyzer");
+
 // 作为配置文件，直接导出配置对象即可
 module.exports = {
   devServer: {
@@ -34,6 +36,9 @@ module.exports = {
         // 其余配置查看compression-webpack-plugin
       })
     );
+
+    // 调试打包后文件查看
+    // config.plugins.push(new WebpackBundleAnalyzer.BundleAnalyzerPlugin());
   },
   chainWebpack: config => {
     // const imagesRule = config.module.rule("images");

@@ -10,7 +10,8 @@
           //- <source src="css/Music.aac" type="audio/mp4"> 
     //- .blur-box( :style="blurPosition" ref="box")
     //-   .blur-bg( :style="{backgroundImage: `url(${backgorundImages[index % 6]})`}")
-    rudy-scrollbar( :wrap-resize="true" @scroll="scrollHandle" )
+    //- rudy-scrollbar( :wrap-resize="true" @scroll="scrollHandle" )
+    div( class="custom-scrollbar" @scroll="scrollHandle")
       router-view
 
 </template>
@@ -21,7 +22,7 @@ import WebHeader from "@/views/home/header.vue";
 import circle from "@/assets/js/circleConnect.js";
 
 export default {
-  name: "home",
+  name: "Home",
   components: { WebHeader },
   data() {
     return {
@@ -42,6 +43,11 @@ export default {
       clickNumber: 0
     };
   },
+  computed: {
+    // blurPosition() {
+    //   return `left: ${this.x}px; top: ${this.y}px`;
+    // }
+  },
   mounted() {
     this.initBgAnimation();
     // this.initBgAnimation();
@@ -50,10 +56,9 @@ export default {
     // }, 1000 * 30);
     // this.$refs.audio.play();
   },
-  computed: {
-    // blurPosition() {
-    //   return `left: ${this.x}px; top: ${this.y}px`;
-    // }
+  destroyed() {
+    // window.removeEventListener("mouseup", this.eventListenHandle);
+    // window.removeEventListener("resize", this.resizeHandle);
   },
   methods: {
     switchBgHandle() {
@@ -165,10 +170,6 @@ export default {
     //     this.y = wrap.clientHeight - box.offsetHeight;
     //   }
     // }
-  },
-  destroyed() {
-    // window.removeEventListener("mouseup", this.eventListenHandle);
-    // window.removeEventListener("resize", this.resizeHandle);
   }
 };
 </script>
