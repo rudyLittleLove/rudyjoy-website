@@ -32,7 +32,8 @@ export default new Router({
         {
           path: "/blogs",
           name: "blogs",
-          component: () => import("@/views/blogs/blogs.vue")
+          component: () =>
+            import(/* webpackChunkName: "blogs" */ "@/views/blogs/blogs.vue")
         },
         {
           path: "/games",
@@ -43,24 +44,34 @@ export default new Router({
             {
               path: "/games/dragonQuestMonster",
               name: "dragonQuestMonster",
-              component: () => import("@/views/dragonQuestMonster.vue")
+              component: () =>
+                import(
+                  /* webpackChunkName: "dragonQuestMonster" */ "@/views/dragonQuestMonster.vue"
+                )
             },
             {
               path: "/games/dragonQuestProp",
               name: "dragonQuestProp",
-              component: () => import("@/views/dragonQuestProp.vue")
+              component: () =>
+                import(
+                  /* webpackChunkName: "dragonQuestProp" */ "@/views/dragonQuestProp.vue"
+                )
             },
             {
               path: "/games/XuanYuanSwordStashes",
               name: "XuanYuanSwordStashes",
               component: () =>
-                import("@/views/games/components/xuan-yuan-sword-stashes.vue")
+                import(
+                  /* webpackChunkName: "XuanYuanSwordStashes" */ "@/views/games/components/xuan-yuan-sword-stashes.vue"
+                )
             },
             {
               path: "/games/XuanYuanSwordDevilPot",
               name: "XuanYuanSwordDevilPot",
               component: () =>
-                import("@/views/games/components/xuan-yuan-sword-devil-pot.vue")
+                import(
+                  /* webpackChunkName: "XuanYuanSwordDevilPot" */ "@/views/games/components/xuan-yuan-sword-devil-pot.vue"
+                )
             }
           ]
         }
