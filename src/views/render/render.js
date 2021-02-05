@@ -869,7 +869,7 @@ export default {
       // 传ctx 时， 绘制全局 需下载数据
 
       let ctx = ctxAll || this.ctxFixed
-      ctx.clearRect(this.colWidth + 1, 0, this.wrapWidth, this.rowHeight)
+      !ctxAll && ctx.clearRect(this.colWidth + 1, 0, this.wrapWidth, this.rowHeight)
 
       // 绘制标尺 表格 线
       ;[this.lineWidth, this.ruleHeight, this.rowHeight].forEach(v => {
@@ -1115,7 +1115,9 @@ export default {
       recursion(data)
       let step = prompt('请输入刻度精度', this.ruleStep)
       let oldStop = this.ruleStep
+      let oldTranslateX = this.translateX
       this.ruleStep = step
+      this.translateX = 0
 
       this.rowIndex = oldRowIndex
 
@@ -1152,8 +1154,8 @@ export default {
           })
       })
 
-      this.renderFixed(ctx)
       this.renderRule(ctx)
+      this.renderFixed(ctx)
       // 计算绘制table线条
       let tableLine = { ado: [] }
       let len = Math.floor(canvasHeight / this.rowHeight) - 1
@@ -1171,6 +1173,7 @@ export default {
       this.render(tableLine, ctx)
       this.wrapWidth = old
       this.ruleStep = oldStop
+      this.translateX = oldTranslateX
 
       // 下载图片
       let image = allCanvas.toDataURL('image/png')
