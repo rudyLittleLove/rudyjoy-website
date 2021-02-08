@@ -87,7 +87,7 @@ export default {
         }
       ],
       fixedData:
-        '[{"type":"multistage","level":1,"text":"施工进度","expand":true,"children":[{"text":"开挖","tip":"100%","level":2,"color":"#2D8CF0","stripe":"thick","data":[{"start":0,"end":100,"level":0},{"start":100,"end":200,"level":3},{"start":200,"end":350,"level":2},{"start":370,"end":480,"level":4},{"start":480,"end":810,"level":5}]},{"text":"二次衬砌","tip":"5%","stripe":"thick","level":2}]},{"type":"multistage","level":1,"text":"质量检查","expand":false,"children":[{"text":"初期支护","tip":"10%","level":2,"stripe":"thin","data":[{"start":0,"end":100,"level":0},{"start":100,"end":200,"level":3},{"start":200,"end":350,"level":2},{"start":370,"end":480,"level":4},{"start":480,"end":810,"level":5}]},{"text":"二次衬砌","tip":"5%","stripe":"thin","level":2}]},{"type":"multistage","level":1,"text":"工序影像","expand":true,"children":[{"level":2,"text":"明洞衬砌","info":"明洞及洞门","data":[{"start":50,"end":54,"level":0},{"start":100,"end":200,"level":3},{"start":200,"end":350,"level":2},{"start":370,"end":480,"level":4},{"start":480,"end":810,"level":1},{"start":980,"end":1100,"level":5},{"start":1480,"end":1550,"level":5},{"start":2480,"end":2500,"level":3}],"expand":true,"children":[{"text":"基础","level":3},{"text":"钢筋","level":3}]},{"level":2,"text":"明洞及洞门","info":"明洞及洞门","expand":false,"data":[{"start":200,"end":350,"level":2},{"start":370,"end":480,"level":4},{"start":480,"end":810,"level":1},{"start":980,"end":1100,"level":5},{"start":1480,"end":1550,"level":5},{"start":2480,"end":2500,"level":3}],"children":[{"text":"基础","level":3,"data":[{"start":380,"end":600,"level":3},{"start":5400,"end":5500,"level":4}]},{"text":"钢筋","level":3}]}]}]',
+        '[{"type":"multistage","level":1,"text":"施工进度","expand":true,"children":[{"text":"开挖","tip":"100%","level":2,"color":"#2D8CF0","stripe":"thick","data":[{"start":0,"end":100,"level":0},{"start":100,"end":200,"level":3},{"start":200,"end":350,"level":2},{"start":370,"end":480,"level":4},{"start":480,"end":810,"level":5}]},{"text":"二次衬砌","tip":"5%","stripe":"thick","level":2}]},{"type":"multistage","level":1,"text":"质量检查","expand":false,"children":[{"text":"初期支护","tip":"10%","level":2,"stripe":"thin","data":[{"start":0,"end":100,"level":0},{"start":100,"end":200,"level":3},{"start":200,"end":350,"level":2},{"start":370,"end":480,"level":4},{"start":480,"end":810,"level":5}]},{"text":"二次衬砌","tip":"5%","stripe":"thin","level":2}]},{"type":"multistage","level":1,"text":"工序影像","expand":true,"children":[{"level":2,"text":"明洞衬砌","info":"明洞及洞门","data":[{"start":50,"end":54,"level":0},{"start":100,"end":200,"level":3},{"start":200,"end":350,"level":2},{"start":370,"end":480,"level":4},{"start":480,"end":810,"level":1},{"start":980,"end":1100,"level":5},{"start":1480,"end":1550,"level":5},{"start":2480,"end":2500,"level":3}],"expand":true,"children":[{"text":"基础","level":3},{"text":"钢筋","level":3}]},{"level":2,"text":"明洞及洞门","info":"明洞及洞门","expand":false,"data":[{"start":200,"end":350,"level":2},{"start":370,"end":480,"level":4},{"start":480,"end":810,"level":1},{"start":980,"end":1100,"level":5},{"start":1480,"end":1550,"level":5},{"start":2480,"end":2500,"level":3}],"children":[{"text":"基础基础基础基础基础基础基础基础基础基础基础","level":3,"data":[{"start":380,"end":600,"level":3},{"start":5400,"end":5500,"level":4}]},{"text":"钢筋","level":3}]}]}]',
       rules: {
         ado: []
       },
@@ -249,7 +249,7 @@ export default {
           break
         case this.targetX < this.colWidth:
           this.lineTableData.forEach(v => {
-            if (!v.fixed && v.level !== 3 && this.isInnerPolygon([x, ys], v.crd)) {
+            if (!v.fixed && this.isInnerPolygon([x, ys], v.crd)) {
               flag = true
               this.current = v
             }
@@ -596,16 +596,17 @@ export default {
         type: 'polygon',
         crd: item.crd,
         fillStyle: item.level === 3 ? 'rgba(0, 0, 0, .03)' : '',
-        hoverFillStyle: item.level === 2 ? this.tableBgColor : '',
+        hoverFillStyle: ['', '', this.tableBgColor, 'rgba(0, 0, 0, .03)'][item.level],
         ctx
       })
 
       let w2 = (x + this.colWidth - this.colw) / 2 + this.colw
-
       if (item.tip) {
         // +2 微调偏移量
         let tipw = this.getTextWidth(item.tip, `font-size: ${this.fontSize}px`).width / 2 + 2
-        let textw = this.getTextWidth(item.text, `font-size: ${this.fontSize}px`).width / 2 + 2
+
+        let textW = this.getTextWidth(item.text, `font-size: ${this.fontSize}px`).width
+        let textw = textW / 2 + 2
 
         item.ado.push({
           type: 'text',
@@ -659,11 +660,19 @@ export default {
           ctx
         })
       } else {
+        let ext = {}
+        let textw = this.getTextWidth(item.text, `font-size: ${this.fontSize}px`).width
+        if (textw > this.colWidth - this.colw) {
+          ext.text = item.text.substr(0, 7) + '...'
+          item.tooltip = item.text
+        }
+
         item.ado.push({
           type: 'text',
           text: item.text,
           crd: [w2, y + this.rowHeight / 2],
-          ctx
+          ctx,
+          ...ext
         })
       }
     },

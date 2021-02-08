@@ -10,6 +10,7 @@
   "dependencies": {
     "core-js": "^2.6.5",
     "element-ui": "^2.12.0",
+    "get-pixels": "^3.3.2",
     "resize-observer-polyfill": "^1.5.1",
     "rudy-captcha": "^1.0.8",
     "rudy-scrollbar": "^1.0.10",

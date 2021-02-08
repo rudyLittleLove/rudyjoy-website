@@ -82,6 +82,11 @@ export default new Router({
       path: '/render',
       name: 'render',
       component: () => import(/* webpackChunkName: "render" */ '@/views/render/index.vue')
+    },
+    {
+      path: '/getImageColor',
+      name: 'getImageColor',
+      component: () => import(/* webpackChunkName: "getImageColor" */ '@/views/getImageColor/index.vue')
     }
   ]
 })

@@ -17,12 +17,12 @@
 </template>
 
 <script>
-import warpdrive from "@/assets/js/warpdrive.js";
-import WebHeader from "@/views/home/header.vue";
-import circle from "@/assets/js/circleConnect.js";
+import warpdrive from '@/assets/js/warpdrive.js'
+import WebHeader from '@/views/home/header.vue'
+import circle from '@/assets/js/circleConnect.js'
 
 export default {
-  name: "Home",
+  name: 'Home',
   components: { WebHeader },
   data() {
     return {
@@ -35,13 +35,13 @@ export default {
       activeY: 0,
       targetX: 0,
       targetY: 0,
-      warpdrive: "",
-      circle: "",
+      warpdrive: '',
+      circle: '',
       showHeader: true,
       scrollTop: 0,
       showAudio: true,
       clickNumber: 0
-    };
+    }
   },
   computed: {
     // blurPosition() {
@@ -49,7 +49,7 @@ export default {
     // }
   },
   mounted() {
-    this.initBgAnimation();
+    this.initBgAnimation()
     // this.initBgAnimation();
     // setInterval(() => {
     //   this.initBgAnimation();
@@ -62,14 +62,14 @@ export default {
   },
   methods: {
     switchBgHandle() {
-      this.clickNumber++;
+      this.clickNumber++
       if (this.clickNumber % 5 === 0) {
-        this.initBgAnimation();
+        this.initBgAnimation()
       }
     },
     scrollHandle(e) {
-      this.showHeader = !(this.scrollTop < e.target.scrollTop);
-      this.scrollTop = e.target.scrollTop;
+      this.showHeader = !(this.scrollTop < e.target.scrollTop)
+      this.scrollTop = e.target.scrollTop
     },
     initBgAnimation() {
       // window.addEventListener("mouseup", this.removeEventListenerHandle);
@@ -78,15 +78,15 @@ export default {
 
       // window.addEventListener("resize", this.resizeHandle);
       if (this.warpdrive) {
-        this.warpdrive.distory();
-        delete this.warpdrive;
+        this.warpdrive.distory()
+        delete this.warpdrive
         this.circle = new circle(this.$refs.wrap, {
           // num: 50,
           width: this.$refs.wrap.clientWidth,
           height: this.$refs.wrap.clientHeight
-        });
+        })
       } else {
-        this.circle && this.circle.distory();
+        this.circle && this.circle.distory()
         this.warpdrive =
           this.warpdrive ||
           new warpdrive(this.$refs.wrap, {
@@ -95,14 +95,10 @@ export default {
             autoResize: true,
             addMouseControls: false,
             addTouchControls: false,
-            starCount:
-              (this.$refs.wrap.clientWidth * this.$refs.wrap.clientHeight) /
-              (!!window.ActiveXObject || "ActiveXObject" in window
-                ? 2000
-                : 1000),
+            starCount: (this.$refs.wrap.clientWidth * this.$refs.wrap.clientHeight) / (!!window.ActiveXObject || 'ActiveXObject' in window ? 2000 : 1000),
             starBgCount: 0,
             starfieldBackgroundColor: { r: 28, g: 39, b: 59 }
-          });
+          })
       }
 
       // box.addEventListener("mousedown", this.addEventListenerHandle);
@@ -171,7 +167,7 @@ export default {
     //   }
     // }
   }
-};
+}
 </script>
 <style lang="stylus" scoped>
 // .button-group

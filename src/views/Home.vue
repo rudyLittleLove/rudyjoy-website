@@ -9,44 +9,44 @@
 
 <script>
 export default {
-  name: "home",
+  name: 'Home',
   components: {},
   data() {
     return {
       isShow: true,
       routerLinks: [
         {
-          label: "登录",
-          path: "/login"
+          label: '登录',
+          path: '/login'
         },
         {
-          label: "勇者斗恶龙11 怪兽大全",
-          path: "/dragonQuestMonster"
+          label: '勇者斗恶龙11 怪兽大全',
+          path: '/dragonQuestMonster'
         },
         {
-          label: "勇者斗恶龙11 道具大全",
-          path: "/dragonQuestProp"
+          label: '勇者斗恶龙11 道具大全',
+          path: '/dragonQuestProp'
         },
         {
-          label: "git 常用命令",
-          path: "/gitCommands"
+          label: 'git 常用命令',
+          path: '/gitCommands'
         },
         {
-          label: "方格动画",
-          path: "/rectRandom"
+          label: '方格动画',
+          path: '/rectRandom'
         }
       ]
-    };
+    }
   },
   methods: {
     toRouterHandle(path) {
-      this.$router.push(path);
+      this.$router.push(path)
     },
     transitionHandle() {
-      this.isShow = !this.isShow;
+      this.isShow = !this.isShow
     }
   }
-};
+}
 </script>
 <style lang="stylus" scoped>
 .button-group

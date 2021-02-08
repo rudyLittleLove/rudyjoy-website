@@ -29,118 +29,142 @@ export default {
       showMenu: false,
       menuData: [
         {
-          label: "简单聊聊",
-          routeName: "baseInfo"
+          label: '简单聊聊',
+          routeName: 'baseInfo'
         },
         {
-          label: "博文详情",
-          routeName: "blogs"
+          label: '博文详情',
+          routeName: 'blogs'
         },
         {
-          label: "博客信息",
+          label: '博客信息',
           children: [
             {
-              label: "CSDN",
-              href: "https://blog.csdn.net/rudy_zhou"
+              label: 'CSDN',
+              href: 'https://blog.csdn.net/rudy_zhou'
             },
             {
-              label: "掘金",
-              href: "https://juejin.im/user/5e01e88f6fb9a0164b4ef199"
+              label: '掘金',
+              href: 'https://juejin.im/user/5e01e88f6fb9a0164b4ef199'
             }
           ]
         },
         {
-          label: "个人社交",
+          label: '个人社交',
           children: [
             {
-              href: "https://github.com/rudyLittleLove",
-              label: "GitHub"
+              href: 'https://github.com/rudyLittleLove',
+              label: 'GitHub'
             },
             {
-              label: "Stack Overflow",
-              href:
-                "https://stackoverflow.com/users/12598378/%e5%a4%9a%e4%b8%80%e7%82%b9%e7%82%b9%e7%88%b1",
-              fontSize: "14px"
+              label: 'Stack Overflow',
+              href: 'https://stackoverflow.com/users/12598378/%e5%a4%9a%e4%b8%80%e7%82%b9%e7%82%b9%e7%88%b1',
+              fontSize: '14px'
             }
           ]
         },
         {
-          label: "武器库",
+          label: '武器库',
           children: [
             {
-              label: "HTML&CSS"
+              label: 'HTML&CSS'
             },
             {
-              label: "JavaScript"
+              label: 'JavaScript'
             },
             {
-              label: "Vue"
+              label: 'Vue'
             },
             {
-              label: "jQuery"
+              label: 'jQuery'
             },
             {
-              label: "echarts"
+              label: 'echarts'
             },
             {
-              label: "node.js"
+              label: 'node.js'
             },
             {
-              label: "CSS3"
+              label: 'CSS3'
             },
             {
-              label: "canvas"
+              label: 'canvas'
             }
           ]
         },
         {
-          label: "工具库",
+          label: '工具库',
           children: [
             {
-              label: "Photoshop"
+              label: 'Photoshop'
             },
             {
-              label: "webstorm"
+              label: 'webstorm'
             },
             {
-              label: "vscode"
+              label: 'vscode'
             },
             {
-              label: "Illustrator"
+              label: 'Illustrator'
             },
             {
-              label: "maya"
+              label: 'maya'
             }
           ]
         },
         {
-          label: "游戏库",
+          label: '游戏库',
           children: [
             {
-              label: "勇者斗恶龙",
-              routeName: "games"
+              label: '勇者斗恶龙',
+              routeName: 'games'
             },
             {
-              label: "轩辕剑之天之痕",
-              routeName: "XuanYuanSwordStashes"
+              label: '轩辕剑之天之痕',
+              routeName: 'XuanYuanSwordStashes'
+            }
+          ]
+        },
+        {
+          label: 'more',
+          children: [
+            {
+              label: 'getImageColor',
+              routeName: 'getImageColor'
+            },
+            {
+              label: 'gitCommands',
+              routeName: 'gitCommands'
+            },
+            {
+              label: 'dishes',
+              routeName: 'dishes'
+            },
+            {
+              label: 'render',
+              routeName: 'render'
+            },
+            {
+              label: 'rectRandom',
+              routeName: 'rectRandom'
             }
           ]
         }
       ]
-    };
+    }
   },
   methods: {
     toPathHandle(item) {
       if (item.href) {
-        window.open(item.href);
-        this.showMenu = false;
+        window.open(item.href)
+        this.showMenu = false
       } else if (item.routeName) {
-        this.$router.push({ name: item.routeName });
-        this.showMenu = false;
+        this.$router.push({ name: item.routeName })
+        this.showMenu = false
       }
     }
   }
-};
+}
 </script>
 
 <style lang="stylus">
