@@ -80,7 +80,7 @@ export default {
 }
 </script>
 
-<style lang="stylus">
+<style lang="stylus" scoped>
 .wrapper {
   width: 1000px;
   margin: auto;

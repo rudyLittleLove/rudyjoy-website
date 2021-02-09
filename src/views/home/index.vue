@@ -68,7 +68,7 @@ export default {
       }
     },
     scrollHandle(e) {
-      this.showHeader = !(this.scrollTop < e.target.scrollTop)
+      // this.showHeader = !(this.scrollTop < e.target.scrollTop)
       this.scrollTop = e.target.scrollTop
     },
     initBgAnimation() {

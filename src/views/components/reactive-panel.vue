@@ -11,9 +11,9 @@ export default {
   data() {
     return {
       hideMenu: true
-    };
+    }
   }
-};
+}
 </script>
 
 <style lang="stylus" scoped>
@@ -36,6 +36,7 @@ export default {
     height calc(100vh - 53px)
   div.content
     // float left
+    margin-top 45px
     margin-left 310px
     width 890px
     background-repeat no-repeat
@@ -89,7 +90,7 @@ export default {
           left 0
           top -50px
           bottom 0
-          width 10000px
+          width 100vw
           background-image linear-gradient(90deg, transparent 250px, rgba(255, 255, 255, .2) 250px), linear-gradient(180deg, rgba(255, 255, 255, .2) 50px, transparent 50px)
           background-size 100% 100%, 250px 50px
           background-repeat no-repeat
