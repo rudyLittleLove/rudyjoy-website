@@ -15,7 +15,7 @@ export default new Router({
     {
       path: '*',
       name: '404',
-      component: () => import(/* webpackChunkName: "404" */ '@/views/home/404.vue')
+      component: () => import('@/views/home/404.vue')
     },
     {
       path: '/',
@@ -31,7 +31,7 @@ export default new Router({
         {
           path: '/blogs',
           name: 'blogs',
-          component: () => import(/* webpackChunkName: "blogs" */ '@/views/blogs/blogs.vue')
+          component: () => import('@/views/blogs/blogs.vue')
         },
         {
           path: '/games',
@@ -42,22 +42,22 @@ export default new Router({
             {
               path: '/games/dragonQuestMonster',
               name: 'dragonQuestMonster',
-              component: () => import(/* webpackChunkName: "dragonQuestMonster" */ '@/views/dragonQuestMonster.vue')
+              component: () => import('@/views/dragonQuestMonster.vue')
             },
             {
               path: '/games/dragonQuestProp',
               name: 'dragonQuestProp',
-              component: () => import(/* webpackChunkName: "dragonQuestProp" */ '@/views/dragonQuestProp.vue')
+              component: () => import('@/views/dragonQuestProp.vue')
             },
             {
               path: '/games/XuanYuanSwordStashes',
               name: 'XuanYuanSwordStashes',
-              component: () => import(/* webpackChunkName: "XuanYuanSwordStashes" */ '@/views/games/components/xuan-yuan-sword-stashes.vue')
+              component: () => import('@/views/games/components/xuan-yuan-sword-stashes.vue')
             },
             {
               path: '/games/XuanYuanSwordDevilPot',
               name: 'XuanYuanSwordDevilPot',
-              component: () => import(/* webpackChunkName: "XuanYuanSwordDevilPot" */ '@/views/games/components/xuan-yuan-sword-devil-pot.vue')
+              component: () => import('@/views/games/components/xuan-yuan-sword-devil-pot.vue')
             }
           ]
         }
@@ -66,27 +66,27 @@ export default new Router({
     {
       path: '/gitCommands',
       name: 'gitCommands',
-      component: () => import(/* webpackChunkName: "GitCommands" */ '@/views/gitCommands.vue')
+      component: () => import('@/views/gitCommands.vue')
     },
     {
       path: '/rectRandom',
       name: 'rectRandom',
-      component: () => import(/* webpackChunkName: "rectRandom" */ '@/views/rectRandom.vue')
+      component: () => import('@/views/rectRandom.vue')
     },
     {
       path: '/dishes',
       name: 'dishes',
-      component: () => import(/* webpackChunkName: "dishes" */ '@/views/dishes/index.vue')
+      component: () => import('@/views/dishes/index.vue')
     },
     {
       path: '/render',
       name: 'render',
-      component: () => import(/* webpackChunkName: "render" */ '@/views/render/index.vue')
+      component: () => import('@/views/render/index.vue')
     },
     {
       path: '/getImageColor',
       name: 'getImageColor',
-      component: () => import(/* webpackChunkName: "getImageColor" */ '@/views/getImageColor/index.vue')
+      component: () => import('@/views/getImageColor/index.vue')
     }
   ]
 })
