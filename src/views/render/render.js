@@ -1057,7 +1057,7 @@ export default {
       // 传ctx 时， 绘制全局 需下载数据
 
       let ctx = ctxAll || this.ctxFixed
-      !ctxAll && ctx.clearRect(this.colWidth + 1, 0, this.wrapWidth, this.rowHeight)
+      !ctxAll && ctx.clearRect(this.colWidth + 1, 0, this.wrapWidth, this.rowHeight * 2)
 
       // 绘制标尺 表格 线
       ;[this.lineWidth, this.ruleHeight, this.rowHeight].forEach(v => {
