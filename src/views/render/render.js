@@ -42,13 +42,21 @@ export default {
       offset: 0.5, // 偏移0.5促使渲染精细
       scrollStep: 20,
       ruleStep: 400,
-      ruleStepMax: 500,
-      ruleStepMin: 50,
+      preMeterToPx: 4,
+      meterToPx: 4,
+      stepPx: 0.5,
+      // ruleStepMax: 10,
+      // ruleStepMin: 2,
+      meterToPxMin: 1,
+      meterToPxMax: 30,
+      ruleStepVal: 100,
+      faceWidth: 8,
+      zeroWidth: 8,
 
       romeNumber: ['Ⅰ', 'Ⅱ', 'Ⅲ', 'Ⅳ', 'Ⅴ', 'Ⅵ', 'Ⅶ', 'Ⅷ', 'Ⅸ', 'Ⅹ'],
       levelColor: ['#4ECB73', '#2DB7F5', '#FAD337', '#FF9900', '#F86F00', '#ED3F14'],
-      rectColor: ['#29CC95', '#3D87FF', '#FDC500', '#FFB800', '#FF582F'],
-      rectHoverColor: ['#64D9B4', '#84B3FE', '#F7D965', '#FAAE70', '#FC7858'],
+      rectColor: ['#C5C9D0', '#FF582F', '#FF8F34', '#FDC500', '#3D87FF', '#29CC95'],
+      rectHoverColor: ['#cccccc', '#FC7858', '#FAAE70', '#F7D965', '#84B3FE', '#64D9B4'],
       minStripe: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGAgMAAACdogfbAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAJUExURf///////////45K5f4AAAADdFJOUwQ/Ta3MexMAAAAJcEhZcwAAAEgAAABIAEbJaz4AAAAaSURBVAjXY2BzYJBkYEhhYJggwOCQwMA4AQASZAKV6dxVvQAAAABJRU5ErkJggg==',
       maxStripe: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAhAQMAAACC6DsSAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAGUExURf///0dwTHBCPHYAAAACdFJOUx4AotLy5wAAAAlwSFlzAAAASAAAAEgARslrPgAAAFpJREFUCNeNzLENwCAUA9H7SkHJCBklo8FojMIIlCkQjokyQCTrqiejm4QGGXVO1LhQpSC8RYjJIczE2DETbady7cj0TWhi6yTfkn1r1jFrUHz7sfWHYRaYxQM150HTObrW+AAAAABJRU5ErkJggg==',
       minStripeColor: null,
@@ -87,59 +95,44 @@ export default {
         }
       ],
       fixedData:
-        '[{"type":"multistage","level":1,"text":"施工进度","expand":true,"children":[{"text":"开挖","tip":"100%","level":2,"color":"#2D8CF0","stripe":"thick","data":[{"start":0,"end":100,"level":0},{"start":100,"end":200,"level":3},{"start":200,"end":350,"level":2},{"start":370,"end":480,"level":4},{"start":480,"end":810,"level":5}]},{"text":"二次衬砌","tip":"5%","stripe":"thick","level":2}]},{"type":"multistage","level":1,"text":"质量检查","expand":false,"children":[{"text":"初期支护","tip":"10%","level":2,"stripe":"thin","data":[{"start":0,"end":100,"level":0},{"start":100,"end":200,"level":3},{"start":200,"end":350,"level":2},{"start":370,"end":480,"level":4},{"start":480,"end":810,"level":5}]},{"text":"二次衬砌","tip":"5%","stripe":"thin","level":2}]},{"type":"multistage","level":1,"text":"工序影像","expand":true,"children":[{"level":2,"text":"明洞衬砌","info":"明洞及洞门","data":[{"start":50,"end":54,"level":0},{"start":100,"end":200,"level":3},{"start":200,"end":350,"level":2},{"start":370,"end":480,"level":4},{"start":480,"end":810,"level":1},{"start":980,"end":1100,"level":5},{"start":1480,"end":1550,"level":5},{"start":2480,"end":2500,"level":3}],"expand":true,"children":[{"text":"基础","level":3},{"text":"钢筋","level":3}]},{"level":2,"text":"明洞及洞门","info":"明洞及洞门","expand":false,"data":[{"start":200,"end":350,"level":2},{"start":370,"end":480,"level":4},{"start":480,"end":810,"level":1},{"start":980,"end":1100,"level":5},{"start":1480,"end":1550,"level":5},{"start":2480,"end":2500,"level":3}],"children":[{"text":"基础基础基础基础基础基础基础基础基础基础基础","level":3,"data":[{"start":380,"end":600,"level":3},{"start":5400,"end":5500,"level":4}]},{"text":"钢筋","level":3}]}]}]',
-      rules: {
-        ado: []
-      },
-      tableLine: {
-        ado: []
-      },
+        '[{"type":"multistage","level":1,"text":"施工进度","expand":true,"subList":[{"text":"开挖","tip":"100%","level":2,"color":"#2D8CF0","stripe":"thick","data":[{"start":0,"end":100,"level":0},{"start":100,"end":200,"level":3},{"start":200,"end":350,"level":2},{"start":370,"end":480,"level":4},{"start":480,"end":810,"level":5}]},{"text":"二次衬砌","tip":"5%","stripe":"thick","level":2}]},{"type":"multistage","level":1,"text":"质量检查","expand":false,"subList":[{"text":"初期支护","tip":"10%","level":2,"stripe":"thin","data":[{"start":0,"end":100,"level":0},{"start":100,"end":200,"level":3},{"start":200,"end":350,"level":2},{"start":370,"end":480,"level":4},{"start":480,"end":810,"level":5}]},{"text":"二次衬砌","tip":"5%","stripe":"thin","level":2}]},{"type":"multistage","level":1,"text":"工序影像","expand":true,"subList":[{"level":2,"text":"明洞衬砌","info":"明洞及洞门","data":[{"start":50,"end":54,"level":0},{"start":100,"end":200,"level":3},{"start":200,"end":350,"level":2},{"start":370,"end":480,"level":4},{"start":480,"end":810,"level":1},{"start":980,"end":1100,"level":5},{"start":1480,"end":1550,"level":5},{"start":2480,"end":2500,"level":3}],"expand":true,"subList":[{"text":"基础","level":3},{"text":"钢筋","level":3}]},{"level":2,"text":"明洞及洞门","info":"明洞及洞门","expand":false,"data":[{"start":200,"end":350,"level":2},{"start":370,"end":480,"level":4},{"start":480,"end":810,"level":1},{"start":980,"end":1100,"level":5},{"start":1480,"end":1550,"level":5},{"start":2480,"end":2500,"level":3}],"subList":[{"text":"基础","level":3,"data":[{"start":380,"end":600,"level":3},{"start":5400,"end":5500,"level":4}]},{"text":"钢筋","level":3}]}]}]',
+      rules: {},
+      tableLine: {},
+      shaft: {},
+
       startPileNo: 150,
       endPileNo: 700,
-      startPileStr: '井口 不知道写啥',
-      endPileStr: '出口 也不知道写啥 你知不知道呀',
+      startPileStr: '',
+      endPileStr: '',
       current: null,
       rowIndex: -1,
+      tunnelWidth: 0,
       tableWidth: 0,
       tableHeight: 0,
       contentStartX: 0,
       contentEndX: 0,
       contentPosition: [0, 0, 0, 0],
 
-      shiftDown: false,
-      ctrlDown: false,
-
       // 拖拽
       oldDownX: 0,
-      oldDownY: 0
+      oldDownY: 0,
+
+      mouseDownX: 0,
+      mouseDownY: 0,
+
+      lineTableData: []
     }
   },
   computed: {
-    lineTableData() {
-      let newArr = []
-      let recursion = arr => {
-        arr.forEach(item => {
-          newArr.push(item)
-          item.expand !== false && item.children && item.children.length && recursion(item.children)
-        })
-      }
-      recursion(this.data)
-      return newArr
-    },
     lineRectData() {
       return this.lineTableData.filter(v => v.data || (!v.expand && v.fixed !== 'xy'))
     }
-  },
-  watch: {
-    lineRectData: {
-      handler() {},
-      immediate: true
-    }
+    // 米与像素比 值
+    // meterPx () {
+    //   return this.ruleStep / this.ruleStepVal
+    // }
   },
   mounted() {
-    this.formatData()
-    this.init()
-
     addResizeListener(this.$refs.canvasWrap, this.listenVessel)
   },
   methods: {
@@ -190,23 +183,6 @@ export default {
       this.canvasWrap.addEventListener('mousedown', this.addMouseDown)
       document.addEventListener('mouseup', this.addMouseUp)
       this.canvasWrap.addEventListener('mouseenter', this.addMouseWhell)
-
-      document.addEventListener('keydown', this.keyDownHandle)
-      document.addEventListener('keyup', this.keyUpHandle)
-    },
-    keyDownHandle(e) {
-      if (e.keyCode === 16) {
-        this.shiftDown = true
-      } else if (e.keyCode === 17) {
-        this.ctrlDown = true
-      }
-    },
-    keyUpHandle(e) {
-      if (e.keyCode === 16) {
-        this.shiftDown = false
-      } else if (e.keyCode === 17) {
-        this.ctrlDown = false
-      }
     },
 
     // 监听容器大小切换
@@ -234,20 +210,22 @@ export default {
 
       let flag = false
       switch (true) {
+        // 标尺 桩号展示判断
         case this.targetY < this.ruleHeight && this.targetX > this.colWidth:
           flag = true
-          var base = 100 / this.ruleStep
+          var base = this.ruleStepVal / this.ruleStep
           var length = (this.targetX - this.colWidth) * base - this.translateX * base + this.startPileNo
 
           this.current = {
-            tooltip: `K${Math.floor(length / 1000)}+${Math.floor(length % 1000)}`,
+            tooltip: `K${Math.floor(length / 1000)}+${Math.round(length % 1000)}`,
             placement: 'rule',
             tooltipXY: [this.targetX, 0]
           }
           break
-        case this.targetY < this.rowHeight * 2:
+        case this.targetY < this.rowHeight:
           break
-        case this.targetX < this.colWidth:
+        // 左侧menu判断
+        case this.targetX < this.colWidth && this.targetY > this.rowHeight * 2:
           this.lineTableData.forEach(v => {
             if (!v.fixed && this.isInnerPolygon([x, ys], v.crd)) {
               flag = true
@@ -255,14 +233,29 @@ export default {
             }
           })
           break
-        default:
+        // 围岩级别判断
+        case this.targetY < this.rowHeight * 2 && this.targetX > this.colWidth:
+          var rowLine = this.lineRectData[0]
+          rowLine &&
+            rowLine.rect.forEach(v => {
+              if (this.isInnerPolygon([xs, y], v.crd)) {
+                flag = true
+                v.placement = 'top'
+                v.tooltipXY = [this.targetX, v.crd[1][1]]
+                this.current = v
+              }
+            })
+          break
+        // 非围岩级别矩形框
+        case this.targetY > this.rowHeight * 2 && this.targetX > this.colWidth:
           var rowIndex = Math.floor(ys / this.rowHeight) - 1
           var row = this.lineRectData[rowIndex]
           row &&
             row.rect.forEach(v => {
-              if (!row.fixed && this.isInnerPolygon([xs, ys], v.crd)) {
+              if (this.isInnerPolygon([xs, ys], v.crd)) {
                 flag = true
-                v.tooltip = v.text
+                v.placement = 'top'
+                v.tooltipXY = [this.targetX, v.crd[1][1] + this.translateY]
                 this.current = v
               }
             })
@@ -274,10 +267,26 @@ export default {
       this.current = null
       this.removeMouseWhell()
     },
-    addMouseClick() {
-      if (this.current && this.current.expand !== undefined) {
-        this.current.expand = !this.current.expand
-        this.renderAll()
+    addMouseClick(e) {
+      if (Math.abs(this.mouseDownX - e.offsetX) > 2 || Math.abs(this.mouseDownY - e.offsetY) > 2) {
+        // 点击移动后，阻止触发点击事件
+        return
+      }
+
+      switch (true) {
+        case this.current && this.current.expand !== undefined:
+          this.current.expand = !this.current.expand
+          this.calcLineTableData()
+          this.renderAll()
+          break
+        case this.current && !!this.current.id && this.current.category === 'processIma':
+          // console.log(this.current.id)
+          this.modalInfo = {
+            modal: true,
+            title: '详情',
+            id: this.current.id,
+            readonly: true
+          }
       }
     },
     // 添加 mousewhell 事件
@@ -292,27 +301,42 @@ export default {
       // 阻止默认事件 （缩放时外部容器禁止滚动）
       e.preventDefault()
 
-      if (e.wheelDelta && (this.tableHeight > this.wrapHeight || this.tableWidth > this.wrapWidth)) {
+      if (e.wheelDelta) {
         let ca = e.wheelDelta > 0 ? -1 : 1
-        if (this.shiftDown) {
-          this.$refs.scrollX.scrollLeft = this.$refs.scrollX.scrollLeft + this.scrollStep * ca
-        } else if (this.ctrlDown) {
-          this.ruleStep -= ca
-          this.ruleStep = this.ruleStep < this.ruleStepMin ? this.ruleStepMin : this.ruleStep
-          this.ruleStep = this.ruleStep > this.ruleStepMax ? this.ruleStepMax : this.ruleStep
+
+        let isScroll = this.tableHeight > this.wrapHeight || this.tableWidth > this.wrapWidth
+        if (e.shiftKey && this.tableWidth > this.wrapWidth) {
+          this.$refs.scrollX.scrollLeft = this.$refs.scrollX.scrollLeft + this.scrollStep * ca * (e.altKey ? 8 : 1)
+        } else if (e.ctrlKey) {
+          this.meterToPx -= ca * this.stepPx * (e.altKey ? 4 : 1)
+          this.meterToPx = this.meterToPx < this.meterToPxMin ? this.meterToPxMin : this.meterToPx
+          this.meterToPx = this.meterToPx > this.meterToPxMax ? this.meterToPxMax : this.meterToPx
+
+          let base = this.ruleStepVal / this.ruleStep
+          let length = (e.offsetX - this.colWidth) * base - this.translateX * base
+
+          this.ruleStep = this.meterToPx * this.ruleStepVal
+
+          if (this.meterToPx < this.meterToPxMax) {
+            this.current = null
+            // 根据鼠标点缩放 偏移滚动条
+            this.$refs.scrollX.scrollLeft = this.$refs.scrollX.scrollLeft - length * this.stepPx * ca
+          }
+
           this.renderAll()
-        } else {
+        } else if (isScroll) {
+          this.current = null
           this.$refs.scrollY.scrollTop = this.$refs.scrollY.scrollTop + this.scrollStep * ca
         }
       }
     },
 
     addMouseDown(e) {
-      this.oldDownX = e.offsetX
-      this.oldDownY = e.offsetY
+      this.mouseDownX = this.oldDownX = e.offsetX
+      this.mouseDownY = this.oldDownY = e.offsetY
 
       if (this.oldDownX > this.colWidth && this.oldDownY > this.rowHeight * 2) {
-        document.body.style.cursor = 'all-scroll'
+        document.body.style.cursor = 'grabbing'
         document.onselectstart = () => false
         document.ondragstart = () => false
         document.addEventListener('mousemove', this.dragCanvas)
@@ -365,7 +389,7 @@ export default {
               break
           }
 
-          item.expand !== false && item.children && item.children.length && recursion(item.children)
+          item.expand !== false && item.subList && item.subList.length && recursion(item.subList)
         })
       }
       recursion(this.data)
@@ -386,16 +410,21 @@ export default {
       }
 
       // 内容最大宽高度计算
-      let maxW = 0
-      this.lineRectData.forEach(v => {
-        !v.fixed &&
-          v.rect &&
-          v.rect.forEach(v2 => {
-            maxW = Math.max(v2.crd[1][0], maxW)
-          })
-      })
+      // let maxW = 0
+
+      // this.lineRectData.forEach(v => {
+      //   v.rect && v.rect.forEach(v2 => {
+      //     let maxs = []
+      //     v2.crd.forEach(v3 => {
+      //       maxs.push(v3[0])
+      //     })
+      //     maxW = Math.max(...maxs, maxW)
+      //   })
+      // })
       // +10 +2 添加偏移量
-      this.tableWidth = maxW + 10
+      // + 20 添加偏移量
+      // this.tableWidth = maxW + 10
+      this.tableWidth = this.tunnelWidth
       this.tableHeight = this.rowHeight * (this.rowIndex + 1) + 2
 
       this.calcContentXY()
@@ -419,15 +448,22 @@ export default {
       let ry = this.rowIndex * this.rowHeight
       let ctx = ctxAll || (item.fixed === 'y' ? this.ctxRule : this.ctx)
       let color = item.fixed === 'y' ? this.levelColor : this.rectColor
+      let hoverColor = item.fixed === 'y' ? this.levelColor : this.rectHoverColor
 
       item.data.forEach(v => {
-        let rx = v.start + this.colWidth
-        let rMx = v.end + this.colWidth
+        let rx = v.start * this.meterToPx + this.colWidth + 0.5
+        let rMx = 0
+        if (!v.end) {
+          rMx = rx + this.faceWidth - 0.5
+        } else {
+          rMx = v.end * this.meterToPx + this.colWidth + 0.5
+          rMx += rx === rMx ? this.zeroWidth : 0
+        }
         let crd = [
-          [rx, ry],
-          [rMx, ry],
-          [rMx, ry + this.rowHeight],
-          [rx, ry + this.rowHeight]
+          [rx, ry + 1.5],
+          [rMx, ry + 1.5],
+          [rMx, ry + this.rowHeight - 0.5],
+          [rx, ry + this.rowHeight - 0.5]
         ]
 
         // 额外样式
@@ -442,6 +478,27 @@ export default {
           ext.hoverFillStyle = undefined
         }
 
+        // 添加掌子面 圆角
+        if (!v.end) {
+          ext.borderRadius = 4
+        }
+
+        let rectExt = {}
+        if (v.tooltip) {
+          rectExt.tooltip = v.tooltip
+        }
+
+        let extData = []
+        if (v.levelCode) {
+          extData.push({
+            type: 'text',
+            text: v.centerName,
+            crd: [rx + (rMx - rx) / 2, ry + this.rowHeight / 2],
+            fillStyle: '#ffffff',
+            ctx
+          })
+        }
+
         item.rect.push({
           crd,
           ado: [
@@ -450,22 +507,18 @@ export default {
               crd,
               // fillStyle: this.levelColor[v.level],
               fillStyle: color[v.level % color.length],
-              hoverFillStyle: this.rectHoverColor[v.level % this.rectHoverColor.length],
+              hoverFillStyle: hoverColor[v.level % hoverColor.length],
               // stroke: false,
               strokeStyle: '#FFFFFF',
               ctx,
               ...ext
             },
-            {
-              type: 'text',
-              text: this.romeNumber[v.level],
-              crd: [rx + (rMx - rx) / 2, ry + this.rowHeight / 2],
-              fillStyle: '#ffffff',
-              ctx
-            }
+            ...extData
           ],
           text: item.text,
-          id: item.id
+          id: v.id,
+          category: v.category,
+          ...rectExt
         })
       })
     },
@@ -476,12 +529,12 @@ export default {
 
       let num = item.expand ? 0 : 1
       item.expand &&
-        item.children.forEach(v => {
+        item.subList.forEach(v => {
           num++
           v.expand &&
-            v.children &&
-            v.children.length &&
-            v.children.forEach(() => {
+            v.subList &&
+            v.subList.length &&
+            v.subList.forEach(() => {
               num++
             })
         })
@@ -489,6 +542,8 @@ export default {
       let height = num * this.rowHeight
       let yMax = y + height
       // 折叠中 渲染水平表格
+      let ext = {}
+      item.tooltip = ''
       if (!item.expand) {
         this.calcTableStair(item, i, this.ctxMenu)
         item.ado[0].hoverFillStyle = this.tableBgColor
@@ -508,6 +563,12 @@ export default {
           ctx
         })
         return
+      } else {
+        let textw = this.getTextWidth(item.text, `font-size: ${this.fontSize}px`).width
+        if (textw > height) {
+          ext.text = item.text.substr(0, num * 2)
+          item.tooltip = item.text
+        }
       }
 
       let xMax = x + this.colw
@@ -519,15 +580,18 @@ export default {
         [xMax, yMax],
         [x, yMax]
       ]
+
       item.ado.push({
         type: 'polygon',
         crd: item.crd,
+        fillStyle: '#ffffff',
         hoverFillStyle: this.tableBgColor,
-        ctx
+        ctx,
+        ext
       })
 
       // 垂直渲染文字 单个循环绘制
-      let arr = item.text
+      let arr = ext.text || item.text
       let lineHeight = this.fontSize * 1.3
       // 偏移量
       let y2 = y + height / 2 - lineHeight * (arr.length / 2) + 12
@@ -595,18 +659,17 @@ export default {
       item.ado.push({
         type: 'polygon',
         crd: item.crd,
-        fillStyle: item.level === 3 ? 'rgba(0, 0, 0, .03)' : '',
-        hoverFillStyle: ['', '', this.tableBgColor, 'rgba(0, 0, 0, .03)'][item.level],
+        fillStyle: item.level === 3 ? '#f7f7f7' : '#ffffff',
+        hoverFillStyle: ['', '', this.tableBgColor, '#f7f7f7'][item.level],
         ctx
       })
 
       let w2 = (x + this.colWidth - this.colw) / 2 + this.colw
+
       if (item.tip) {
         // +2 微调偏移量
         let tipw = this.getTextWidth(item.tip, `font-size: ${this.fontSize}px`).width / 2 + 2
-
-        let textW = this.getTextWidth(item.text, `font-size: ${this.fontSize}px`).width
-        let textw = textW / 2 + 2
+        let textw = this.getTextWidth(item.text, `font-size: ${this.fontSize}px`).width / 2 + 2
 
         item.ado.push({
           type: 'text',
@@ -632,9 +695,9 @@ export default {
         item.ado.push({
           type: 'text',
           text: item.info,
-          fillStyle: item.expand ? '#2D8CF0' : '#435258',
-          font: `${this.fontSize * 0.7}px ${this.fontFamily}`,
-          crd: [w2, y + this.rowHeight / 3],
+          // fillStyle: item.expand ? '#2D8CF0' : '#435258',
+          font: `bold 13px ${this.fontFamily}`,
+          crd: [w2, y + this.rowHeight / 3 - 1.5],
           ctx
         })
 
@@ -642,23 +705,24 @@ export default {
           type: 'text',
           text: item.text,
           font: `${this.fontSize * 0.8}px ${this.fontFamily}`,
-          crd: [w2, y + (this.rowHeight / 4) * 3],
+          crd: [w2, y + (this.rowHeight / 4) * 3 + 1.5],
           ctx
         })
 
         // 取正负1 控制三角形正反
         let pm = item.expand ? 1 : -1
-        item.ado.push({
-          type: 'polygon',
-          crd: [
-            [w2 - 5, y + this.rowHeight / 2 - 3 * pm],
-            [w2 + 5, y + this.rowHeight / 2 - 3 * pm],
-            [w2, y + this.rowHeight / 2 + 3 * pm]
-          ],
-          fillStyle: item.expand ? '#4FA5FF' : '#D3DCE6',
-          stroke: false,
-          ctx
-        })
+        ;(item.subList || []).length &&
+          item.ado.push({
+            type: 'polygon',
+            crd: [
+              [w2 - 5, y + this.rowHeight / 2 - 3 * pm],
+              [w2 + 5, y + this.rowHeight / 2 - 3 * pm],
+              [w2, y + this.rowHeight / 2 + 3 * pm]
+            ],
+            fillStyle: item.expand ? '#4FA5FF' : '#D3DCE6',
+            stroke: false,
+            ctx
+          })
       } else {
         let ext = {}
         let textw = this.getTextWidth(item.text, `font-size: ${this.fontSize}px`).width
@@ -670,11 +734,27 @@ export default {
         item.ado.push({
           type: 'text',
           text: item.text,
+          font: `${this.fontSize * 0.8}px ${this.fontFamily}`,
           crd: [w2, y + this.rowHeight / 2],
           ctx,
           ...ext
         })
       }
+    },
+    // 计算表格展示所有行
+    calcLineTableData() {
+      let newArr = []
+      let recursion = arr => {
+        arr.forEach(item => {
+          newArr.push(item)
+          item.expand !== false && item.subList && item.subList.length && recursion(item.subList)
+        })
+      }
+      recursion(this.data)
+      this.lineTableData = newArr
+    },
+    calcTunnelWidth() {
+      this.tunnelWidth = (this.endPileNo - this.startPileNo) * this.meterToPx + this.colWidth + 20
     },
     // 获取 偏移后 x , y
     destruction() {
@@ -686,15 +766,16 @@ export default {
 
     // 全局绘制(重绘)
     renderAll() {
-      this.renderRule()
-      this.calcRender()
-      this.renderNodes()
-      this.renderFixed()
+      console.log('全局绘制（重绘）')
+      this.$nextTick(() => {
+        this.calcRender()
+        this.renderRule()
+        this.renderNodes()
+        this.renderFixed()
+      })
     },
     // 绘制 所有元素
     renderNodes() {
-      // 传ctx 时， 绘制全局 需下载数据
-
       // 绘制表格
       this.ctxFixed.clearRect(0, 0, this.colWidth, this.wrapHeight)
       // this.tableFixed.width = this.tableFixed.width
@@ -713,7 +794,7 @@ export default {
       if (this.translateY) {
         this.renderScrollShadow(this.ctxMenu, [0, yMin - 10, this.wrapWidth, 10])
       }
-      // 判断绘制纵向滚动中投影
+      // 判断绘制横向滚动中投影
       if (this.translateX) {
         this.$nextTick(() => {
           this.renderScrollShadow(this.ctxRule, [this.colWidth - this.translateX - 10, 0, 10, this.rowHeight * (this.rowIndex + 1)])
@@ -745,8 +826,8 @@ export default {
           item.rect.forEach(v => {
             let [x] = v.crd[0]
             let [xMax] = v.crd[1]
-            let boolX = (x <= this.contentEndX && x >= this.contentStartX) || (xMax <= this.contentEndX && xMax >= this.contentStartX)
-            boolX && this.render(v)
+            let boolX = (x > this.contentEndX && xMax > this.contentEndX) || (x < this.contentStartX && xMax < this.contentStartX)
+            !boolX && this.render(v)
           })
       })
     },
@@ -795,7 +876,7 @@ export default {
       })
     },
 
-    // 绘制标尺
+    // 绘制标尺画布（刻度，刻度值，斜井、竖井）
     renderRule(ctxAll) {
       // ctxAll 时， 绘制全局 需下载数据
 
@@ -808,46 +889,47 @@ export default {
         ctx.clip()
       }
 
-      // 绘制标尺刻度，刻度值
-
       // 计算可渲染标尺
       let start = Math.floor(Math.abs(this.translateX) / this.ruleStep) + 1
-      let end = Math.ceil((Math.abs(this.translateX) + this.wrapWidth) / this.ruleStep)
+      let end = Math.ceil((Math.abs(this.translateX) + this.wrapWidth) / this.ruleStep) + 1
 
       this.rules.ado = []
 
       this.rules.startX = start + this.startPileNo
-      for (let i = start; i < end + 1; i++) {
+      for (let i = start; i < end; i++) {
         let x = this.colWidth + i * this.ruleStep - this.offset
-        i &&
-          this.rules.ado.push({
-            type: 'line',
-            crd: [
-              [x, this.ruleHeight],
-              [x, this.ruleHeight + this.tickLength]
-            ],
-            ctx
-          })
+        this.rules.ado.push({
+          type: 'line',
+          crd: [
+            [x, this.ruleHeight],
+            [x, this.ruleHeight + this.tickLength]
+          ],
+          ctx
+        })
 
         let y = this.ruleHeight / 2 + 2
 
         // +2 手动修正偏移
-        let text = this.startPileNo + i * 100
-        i &&
-          this.rules.ado.push({
-            type: 'text',
-            crd: [x, y],
-            text: text,
-            fillStyle: this.tickTextColor,
-            font: `${this.tickFontSize * (this.ruleStep >= 100 ? 1.1 : 1)}px ${this.fontFamily}`,
-            ctx
-          })
+        // this.startPileNo +
+        let text = i * this.ruleStepVal
+        this.rules.ado.push({
+          type: 'text',
+          crd: [x, y],
+          text: text,
+          fillStyle: this.tickTextColor,
+          font: `${this.tickFontSize * (this.ruleStep >= 100 ? 1.1 : 1)}px ${this.fontFamily}`,
+          ctx
+        })
 
         if (this.ruleStep >= 100) {
           let num = 0
+
           if (this.ruleStep >= 100) num = 2
           if (this.ruleStep >= 200) num = 5
           if (this.ruleStep >= 400) num = 10
+          if (this.ruleStep >= 800) num = 20
+          if (this.ruleStep >= 1500) num = 50
+          if (this.ruleStep >= 3000) num = 100
 
           let step = this.ruleStep / num
           for (let j = 1; j < num; j++) {
@@ -855,7 +937,7 @@ export default {
             this.rules.ado.push({
               type: 'text',
               crd: [xm, y],
-              text: text + (100 / num) * j - 100,
+              text: text + (this.ruleStepVal / num) * j - this.ruleStepVal,
               fillStyle: this.tickTextColor,
               font: `${this.tickFontSize * 0.75}px ${this.fontFamily}`,
               ctx
@@ -873,6 +955,93 @@ export default {
       }
 
       this.render(this.rules)
+
+      this.shaft.ado = []
+      let color = '#90A5BA'
+      ;(this.shaft.originData || []).forEach(v => {
+        let x = this.pileNoToCrd(v.startPileNo) + this.colWidth
+
+        // 计算斜井线
+        this.shaft.ado.push({
+          type: 'line',
+          crd: [
+            [x, 0],
+            [x, this.tableHeight]
+          ],
+          ctx,
+          strokeStyle: '#FFFFFF',
+          lineWidth: 2
+        })
+        this.shaft.ado.push({
+          type: 'line',
+          crd: [
+            [x, 0],
+            [x, this.tableHeight]
+          ],
+          ctx,
+          strokeStyle: color,
+          lineWidth: 2,
+          setLineDash: [2, 2]
+        })
+
+        // 计算斜井文本
+        this.shaft.ado.push({
+          type: 'text',
+          text: `${v.name} ${v.startPileStr}`,
+          crd: [x + 40, this.ruleHeight + this.tipHeight / 2 + 2],
+          textAlign: 'start',
+          fillStyle: this.pileStrColor,
+          ctx
+        })
+
+        // 计算顶部三角
+        this.shaft.ado.push({
+          type: 'polygon',
+          crd: [
+            [x - 6, 0],
+            [x + 6, 0],
+            [x, 7]
+          ],
+          fillStyle: color,
+          stroke: false,
+          ctx
+        })
+
+        // 计算斜井左右箭头
+        let y = this.ruleHeight
+        ;[x, x - 25].forEach((v, i) => {
+          let xMax = v + this.tipHeight
+          let yMax = y + this.tipHeight
+
+          let xx = i ? xMax : v
+          let xd = !i ? xMax : v
+          let ca = i ? -1 : 1
+
+          let x2 = xx + 8 * ca
+          let x3 = xx + 18 * ca
+
+          let crd = [
+            [x2, yMax - (this.ruleHeight / 2 - 3)],
+            [x3, yMax - (this.ruleHeight / 2 - 3)],
+            [x3, yMax - (this.ruleHeight / 2 - 6)],
+            [xd, yMax - this.ruleHeight / 2],
+            [x3, yMax - (this.ruleHeight / 2 + 6)],
+            [x3, yMax - (this.ruleHeight / 2 + 3)],
+            [x2, yMax - (this.ruleHeight / 2 + 3)],
+            [x2, y]
+          ]
+
+          this.shaft.ado.push({
+            type: 'polygon',
+            crd,
+            fillStyle: color,
+            ctx
+          })
+        })
+      })
+      this.$nextTick(() => {
+        this.render(this.shaft)
+      })
     },
     renderFixed(ctxAll) {
       // 传ctx 时， 绘制全局 需下载数据
@@ -957,6 +1126,11 @@ export default {
       })
     },
 
+    // 桩号转坐标
+    pileNoToCrd(pileNo) {
+      return (pileNo - this.startPileNo) * this.meterToPx || 0
+    },
+
     // 绘制形状
     drawPolygon(data, ctx) {
       let arr = data.crd.concat()
@@ -979,10 +1153,30 @@ export default {
         ctx.clearRect(xMin, yMin, xMax - xMin, yMax - yMin)
       }
       ctx.beginPath()
-      ctx.moveTo(...arr.shift())
-      do {
-        ctx.lineTo(...arr.shift())
-      } while (arr.length)
+
+      // 判断是否绘制圆角
+      if (data.borderRadius) {
+        let r = data.borderRadius
+        let [x, y] = arr.shift()
+        let x1 = x - (x - arr[0][0]) / 2
+        ctx.moveTo(x1, y)
+        do {
+          let [x2, y2] = arr.shift()
+          let [x3, y3] = arr[0] || [x, y]
+
+          let xa = x2 - (x2 - x3) / 2
+          let ya = y2 - (y2 - y3) / 2
+
+          ctx.arcTo(x2, y2, xa, ya, r)
+        } while (arr.length)
+
+        ctx.arcTo(x, y, x1, y, r)
+      } else {
+        ctx.moveTo(...arr.shift())
+        do {
+          ctx.lineTo(...arr.shift())
+        } while (arr.length)
+      }
 
       data.closePath !== false && ctx.closePath()
 
@@ -1017,6 +1211,7 @@ export default {
       ctx.strokeStyle = data.strokeStyle || this.lineColor
       ctx.lineCap = data.lineCap || ctx.lineCap
       ctx.lineWidth = data.lineWidth || this.lineWidth
+      data.setLineDash && ctx.setLineDash(data.setLineDash)
 
       ctx.beginPath()
       ctx.moveTo(...arr.shift())
@@ -1073,6 +1268,7 @@ export default {
 
     renderAllNodesAndDownload() {
       let allCanvas = document.createElement('canvas')
+      // let allCanvas = this.$refs.canvas
       let ctx = allCanvas.getContext('2d')
 
       // 重新格式化所有数据
@@ -1084,10 +1280,19 @@ export default {
           if (item.expand !== undefined) {
             item.expand = true
           }
-          item.children && item.children.length && recursionExpand(item.children)
+          item.subList && item.subList.length && recursionExpand(item.subList)
         })
       }
       recursionExpand(data)
+
+      // let px = prompt('请输入一米对应像素', this.meterToPx)
+      // let oldMeterToPx = this.meterToPx
+      // this.meterToPx = px
+      // let step = px * this.ruleStepVal
+      // let oldStop = this.ruleStep
+      let oldTranslateX = this.translateX
+      // this.ruleStep = step
+      this.translateX = 0
 
       // 计算所有行数
       let rows = []
@@ -1095,7 +1300,7 @@ export default {
       let recursion = arr => {
         arr.forEach((item, i) => {
           allRows.push(item)
-          ;(item.expand === undefined || item.level !== 1) && rows.push(item)
+          ;(!item.subList || item.level !== 1) && rows.push(item)
 
           this.rowIndex++
           item.ado = []
@@ -1118,35 +1323,39 @@ export default {
               break
           }
 
-          item.children && item.children.length && recursion(item.children)
+          item.subList && item.subList.length && recursion(item.subList)
         })
       }
       recursion(data)
-      let step = prompt('请输入刻度精度', this.ruleStep)
-      let oldStop = this.ruleStep
-      let oldTranslateX = this.translateX
-      this.ruleStep = step
-      this.translateX = 0
 
       this.rowIndex = oldRowIndex
 
       // 计算最大宽度，高度
-      let maxW = 0
-      rows.forEach(v => {
-        if (!v.fixed && v.rect) {
-          v.rect.forEach(v2 => {
-            maxW = Math.max(v2.crd[1][0], maxW)
-          })
-        }
-      })
+      // let maxW = 0
+
+      // rows.forEach(v => {
+      //   if (v.rect) {
+      //     v.rect.forEach(v2 => {
+      //       let maxs = []
+      //       v2.crd.forEach(v3 => {
+      //         maxs.push(v3[0])
+      //       })
+      //       maxW = Math.max(...maxs, maxW)
+      //     })
+      //   }
+      // })
+
       // +10 +2 添加偏移量
-      let canvasWidth = maxW + 10
+      // let canvasWidth = maxW + 10
+      let canvasWidth = this.tunnelWidth
       let canvasHeight = rows.length * this.rowHeight
 
       allCanvas.height = canvasHeight + 2
       allCanvas.width = canvasWidth
 
       // 全局绘制
+      let oldTableHeight = this.tableHeight
+      this.tableHeight = canvasHeight
       let old = this.wrapWidth
       this.wrapWidth = canvasWidth
       ctx.fillStyle = '#ffffff'
@@ -1181,18 +1390,22 @@ export default {
       }
       this.render(tableLine, ctx)
       this.wrapWidth = old
-      this.ruleStep = oldStop
+      // this.ruleStep = oldStop
       this.translateX = oldTranslateX
+      this.tableHeight = oldTableHeight
+      // this.meterToPx = oldMeterToPx
 
       // 下载图片
-      let image = allCanvas.toDataURL('image/png')
-      let save_link = document.createElement('a')
-      save_link.href = image
-      save_link.download = '施工进度图.png'
+      this.$nextTick(() => {
+        let image = allCanvas.toDataURL('image/png')
+        let save_link = document.createElement('a')
+        save_link.href = image
+        save_link.download = '施工进度图.png'
 
-      let clickevent = document.createEvent('MouseEvents')
-      clickevent.initEvent('click', true, false)
-      save_link.dispatchEvent(clickevent)
+        let clickevent = document.createEvent('MouseEvents')
+        clickevent.initEvent('click', true, false)
+        save_link.dispatchEvent(clickevent)
+      })
     }
   },
   destroyed() {
