@@ -1,12 +1,15 @@
 <template lang="pug">
   .statistic-analysis-wrapper
-    el-form.filter-wrapper( :model="filterData" inline label-width="80" class="form-inline")
-      el-form-item( label="K" label-width="50")
+    el-form.filter-wrapper( :model="filterData" inline label-width="80px" class="form-inline")
+      el-form-item( label="K" label-width="20px")
         el-input-number( size="small" v-model="filterData.k" controls-position="right" :min="kMin" :max="kMax" :precision="0")
-      el-form-item( label="+" label-width="20")
+      el-form-item( label="+" label-width="20px")
         el-input-number( size="small" v-model="filterData.v" controls-position="right" :min="vMin" :max="vMax" :step="1" :precision="1")
       el-button( size="small" type="primary" :disabled="data.length <= 2" @click="locationHandle") 定位
       el-button( size="small" type="primary" @click="renderAllNodesAndDownload") 下载
+      el-form-item( label="行高" label-width="80px")
+        el-select( v-model="rowHeight" @change="changeRowHeight")
+          el-option( v-for="item in rowHegihtOptions" :key="item" :value="item" :label="item")
     .content-wrapper
       .header-info-box.clearfix( :class="{expand: isHeaderExpand}")
         .inner-wrap
@@ -118,7 +121,7 @@ export default {
   methods: {
     // 获取数据
     getData() {
-      this.originData = data
+      this.originData = JSON.parse(JSON.stringify(data))
 
       console.log('施工进度：', data.constructionProgress)
       console.log('质量检查：', data.qualityInspection)
@@ -293,6 +296,12 @@ export default {
           top: top + 'px'
         }
       }, 10)
+    },
+
+    changeRowHeight() {
+      this.$nextTick(() => {
+        this.renderAll()
+      })
     }
   }
 }

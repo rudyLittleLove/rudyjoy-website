@@ -23,15 +23,18 @@ export default {
       translateY: 0,
 
       // 图表内 标尺 尺寸
-      rowHeight: 50,
-      colw: 50,
+      rowHeight: 40,
+      rowHegihtOptions: [40, 45, 50, 55, 60, 65],
+      colw: 40,
       colWidth: 200,
-      ruleHeight: 24,
-      tipHeight: 26,
+      // ruleHeight: 24,
+      // tipHeight: 26,
       lineWidth: 1,
       fontSize: 16,
       fontFamily: 'Microsoft YaHei Regular',
-      tableBgColor: 'rgba(45, 140, 240, .1)',
+      tableBgColor: 'transparent',
+      tableHoverBgColor: 'rgba(45, 140, 240, .1)',
+      tableLevel3BgColor: 'rgba(0, 0, 0, .3)',
       innerWrapBgColor: '#EEF6FD',
       lineColor: '#DBE2E8',
       fillStyle: 'transparent',
@@ -124,6 +127,12 @@ export default {
     }
   },
   computed: {
+    ruleHeight() {
+      return this.rowHeight * 0.48
+    },
+    tipHeight() {
+      return this.rowHeight * 0.52
+    },
     lineRectData() {
       return this.lineTableData.filter(v => v.data || (!v.expand && v.fixed !== 'xy'))
     }
@@ -546,7 +555,7 @@ export default {
       item.tooltip = ''
       if (!item.expand) {
         this.calcTableStair(item, i, this.ctxMenu)
-        item.ado[0].hoverFillStyle = this.tableBgColor
+        item.ado[0].hoverFillStyle = this.tableHoverBgColor
         let yc = y + this.rowHeight / 2 - 3
         let xc = x + 13
         // 绘制向下箭头
@@ -584,8 +593,8 @@ export default {
       item.ado.push({
         type: 'polygon',
         crd: item.crd,
-        fillStyle: '#ffffff',
-        hoverFillStyle: this.tableBgColor,
+        fillStyle: this.tableBgColor,
+        hoverFillStyle: this.tableHoverBgColor,
         ctx,
         ext
       })
@@ -634,6 +643,7 @@ export default {
       item.ado.push({
         type: 'polygon',
         crd: item.crd,
+        fillStyle: this.tableBgColor,
         ctx: ctx || this.ctxFixed
       })
 
@@ -659,8 +669,8 @@ export default {
       item.ado.push({
         type: 'polygon',
         crd: item.crd,
-        fillStyle: item.level === 3 ? '#f7f7f7' : '#ffffff',
-        hoverFillStyle: ['', '', this.tableBgColor, '#f7f7f7'][item.level],
+        fillStyle: item.level === 3 ? this.tableLevel3BgColor : this.tableBgColor,
+        hoverFillStyle: ['', '', this.tableHoverBgColor, this.tableLevel3BgColor][item.level],
         ctx
       })
 
@@ -1083,9 +1093,11 @@ export default {
         let xd = !i ? xMax : v
         let ca = i ? -1 : 1
 
-        let x1 = xx + 6 * ca
-        let x2 = xx + 8 * ca
-        let x3 = xx + 23 * ca
+        let xl = this.tipHeight * 0.23
+
+        let x1 = xx + xl * ca
+        let x2 = xx + (xl + 2) * ca
+        let x3 = xx + (this.tipHeight - 4) * ca
 
         let crd = [
           [x1, y0],
