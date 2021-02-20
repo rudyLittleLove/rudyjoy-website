@@ -34,7 +34,7 @@ export default {
       fontFamily: 'Microsoft YaHei Regular',
       tableBgColor: 'transparent',
       tableHoverBgColor: 'rgba(45, 140, 240, .1)',
-      tableLevel3BgColor: 'rgba(0, 0, 0, .3)',
+      tableLevel3BgColor: 'rgba(0, 0, 0, .04)',
       innerWrapBgColor: '#EEF6FD',
       lineColor: '#DBE2E8',
       fillStyle: 'transparent',

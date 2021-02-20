@@ -14,7 +14,7 @@
       .header-info-box.clearfix( :class="{expand: isHeaderExpand}")
         .inner-wrap
           .tip-title
-            div.current 隧道
+            div.current 操作
             div 简介
           .tip-info-content
             div.tunnel-name {{tunnelName}}
