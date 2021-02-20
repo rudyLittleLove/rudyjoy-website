@@ -333,7 +333,7 @@ export default {
           if (this.meterToPx < this.meterToPxMax) {
             this.current = null
             // 根据鼠标点缩放 偏移滚动条
-            this.$refs.scrollX.scrollLeft = this.$refs.scrollX.scrollLeft - length * this.stepPx * ca
+            this.$refs.scrollX.scrollLeft = this.$refs.scrollX.scrollLeft - length * this.stepPx * ca * (e.altKey ? 4 : 1)
           }
 
           this.renderAll()
