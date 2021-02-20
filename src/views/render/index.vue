@@ -179,6 +179,7 @@ export default {
           return item
         })
       }
+      this.data.push(...JSON.parse(this.extData))
       // 工序影像
       if (this.originData.processIma && this.originData.processIma.length) {
         this.data.push({

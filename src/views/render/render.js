@@ -40,6 +40,9 @@ export default {
       fillStyle: 'transparent',
       tickTextColor: '#84A6C3',
       pileStrColor: '#58718A',
+      inOutIconBgColor: '#90A5BA',
+      inOutIconColor: '#ffffff',
+      fontColor: '#000000',
       tickFontSize: 14,
       tickLength: 8,
       offset: 0.5, // 偏移0.5促使渲染精细
@@ -99,6 +102,7 @@ export default {
       ],
       fixedData:
         '[{"type":"multistage","level":1,"text":"施工进度","expand":true,"subList":[{"text":"开挖","tip":"100%","level":2,"color":"#2D8CF0","stripe":"thick","data":[{"start":0,"end":100,"level":0},{"start":100,"end":200,"level":3},{"start":200,"end":350,"level":2},{"start":370,"end":480,"level":4},{"start":480,"end":810,"level":5}]},{"text":"二次衬砌","tip":"5%","stripe":"thick","level":2}]},{"type":"multistage","level":1,"text":"质量检查","expand":false,"subList":[{"text":"初期支护","tip":"10%","level":2,"stripe":"thin","data":[{"start":0,"end":100,"level":0},{"start":100,"end":200,"level":3},{"start":200,"end":350,"level":2},{"start":370,"end":480,"level":4},{"start":480,"end":810,"level":5}]},{"text":"二次衬砌","tip":"5%","stripe":"thin","level":2}]},{"type":"multistage","level":1,"text":"工序影像","expand":true,"subList":[{"level":2,"text":"明洞衬砌","info":"明洞及洞门","data":[{"start":50,"end":54,"level":0},{"start":100,"end":200,"level":3},{"start":200,"end":350,"level":2},{"start":370,"end":480,"level":4},{"start":480,"end":810,"level":1},{"start":980,"end":1100,"level":5},{"start":1480,"end":1550,"level":5},{"start":2480,"end":2500,"level":3}],"expand":true,"subList":[{"text":"基础","level":3},{"text":"钢筋","level":3}]},{"level":2,"text":"明洞及洞门","info":"明洞及洞门","expand":false,"data":[{"start":200,"end":350,"level":2},{"start":370,"end":480,"level":4},{"start":480,"end":810,"level":1},{"start":980,"end":1100,"level":5},{"start":1480,"end":1550,"level":5},{"start":2480,"end":2500,"level":3}],"subList":[{"text":"基础","level":3,"data":[{"start":380,"end":600,"level":3},{"start":5400,"end":5500,"level":4}]},{"text":"钢筋","level":3}]}]}]',
+      extData: '[{"type":"multistage","level":1,"text":"施工进度","expand":true,"subList":[{"text":"开挖","tip":"100%","level":2,"color":"#2D8CF0","stripe":"thick","data":[{"start":0,"end":100,"level":0},{"start":100,"end":200,"level":3},{"start":200,"end":350,"level":2},{"start":370,"end":480,"level":4},{"start":480,"end":810,"level":5}]},{"text":"二次衬砌","tip":"5%","stripe":"thick","level":2}]},{"type":"multistage","level":1,"text":"质量检查","expand":false,"subList":[{"text":"初期支护","tip":"10%","level":2,"stripe":"thin","data":[{"start":0,"end":100,"level":0},{"start":100,"end":200,"level":3},{"start":200,"end":350,"level":2},{"start":370,"end":480,"level":4},{"start":480,"end":810,"level":5}]},{"text":"二次衬砌","tip":"5%","stripe":"thin","level":2}]}]',
       rules: {},
       tableLine: {},
       shaft: {},
@@ -1085,7 +1089,7 @@ export default {
             [xMax, yMax],
             [v, yMax]
           ],
-          fillStyle: '#90A5BA',
+          fillStyle: this.inOutIconBgColor,
           ctx
         })
 
@@ -1115,7 +1119,7 @@ export default {
 
         this.drawPolygon({
           crd,
-          fillStyle: '#ffffff',
+          fillStyle: this.inOutIconColor,
           ctx
         })
 
@@ -1242,7 +1246,7 @@ export default {
       ctx.textBaseline = data.textBaseline || 'middle'
       ctx.textAlign = data.textAlign || 'center'
       ctx.font = data.font || `${this.fontSize}px ${this.fontFamily}`
-      ctx.fillStyle = data.fillStyle || '#000000'
+      ctx.fillStyle = data.fillStyle || this.fontColor
 
       ctx.fillText(data.text, ...data.crd)
       ctx.restore()
@@ -1370,8 +1374,6 @@ export default {
       this.tableHeight = canvasHeight
       let old = this.wrapWidth
       this.wrapWidth = canvasWidth
-      ctx.fillStyle = '#ffffff'
-      ctx.fillRect(0, 0, canvasWidth, canvasHeight)
       ctx.fillStyle = this.innerWrapBgColor
       ctx.fillRect(this.colWidth, this.rowHeight, canvasWidth, canvasHeight)
 
