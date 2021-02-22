@@ -73,10 +73,6 @@ export default {
       targetX: 0,
       targetY: 0,
 
-      // 画布偏移量
-      offsetX: 0,
-      offsetY: 0,
-
       data: [],
       rootData: [
         {
@@ -345,10 +341,13 @@ export default {
     },
 
     addMouseDown(e) {
-      this.mouseDownX = this.oldDownX = e.offsetX
-      this.mouseDownY = this.oldDownY = e.offsetY
+      this.oldDownX = e.pageX
+      this.oldDownY = e.pageY
 
-      if (this.oldDownX > this.colWidth && this.oldDownY > this.rowHeight * 2) {
+      this.mouseDownX = e.offsetX
+      this.mouseDownY = e.offsetY
+
+      if (e.offsetX > this.colWidth && e.offsetY > this.rowHeight * 2) {
         document.body.style.cursor = 'grabbing'
         document.onselectstart = () => false
         document.ondragstart = () => false
@@ -363,8 +362,8 @@ export default {
     },
     // 拖拽
     dragCanvas(e) {
-      let x = e.offsetX
-      let y = e.offsetY
+      let x = e.pageX
+      let y = e.pageY
 
       let offsetX = x - this.oldDownX
       let offsetY = y - this.oldDownY
@@ -1408,6 +1407,9 @@ export default {
       this.translateX = oldTranslateX
       this.tableHeight = oldTableHeight
       // this.meterToPx = oldMeterToPx
+      // this.$nextTick(() => {
+      //   this.printHandle(allCanvas)
+      // })
 
       // 下载图片
       this.$nextTick(() => {
@@ -1420,6 +1422,13 @@ export default {
         clickevent.initEvent('click', true, false)
         save_link.dispatchEvent(clickevent)
       })
+    },
+    printHandle(canvas) {
+      let imgData = canvas.toDataURL('image/png')
+      let win = window.open()
+
+      win.document.write = `<img src='${imgData}'/>`
+      win.print()
     }
   },
   destroyed() {
