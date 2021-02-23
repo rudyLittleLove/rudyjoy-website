@@ -20,8 +20,6 @@ export default {
 .box-wrapper
   width 1000px
   margin auto
-  >>> .page-photo img
-    width 100%
-    height 100%
-    object-fit contain
+  >>> .page-photo
+    overflow auto
 </style>

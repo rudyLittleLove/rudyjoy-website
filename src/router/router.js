@@ -92,6 +92,11 @@ export default new Router({
       path: '/flipPage',
       name: 'flipPage',
       component: () => import('@/views/flipPage/index.vue')
+    },
+    {
+      path: '/drawRect',
+      name: 'drawRect',
+      component: () => import('@/views/drawRect/index.vue')
     }
   ]
 })

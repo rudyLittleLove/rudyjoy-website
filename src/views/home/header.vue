@@ -147,6 +147,14 @@ export default {
             {
               label: 'rectRandom',
               routeName: 'rectRandom'
+            },
+            {
+              label: 'flipPage',
+              routeName: 'flipPage'
+            },
+            {
+              label: 'drawRect',
+              routeName: 'drawRect'
             }
           ]
         }
