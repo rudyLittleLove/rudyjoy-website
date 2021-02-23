@@ -73,6 +73,10 @@ export default {
       targetX: 0,
       targetY: 0,
 
+      animationStepX: 0,
+      animationStepY: 0,
+      stepTime: 0,
+
       data: [],
       rootData: [
         {
@@ -347,6 +351,8 @@ export default {
       this.mouseDownX = e.offsetX
       this.mouseDownY = e.offsetY
 
+      clearTimeout(this.timer)
+
       if (e.offsetX > this.colWidth && e.offsetY > this.rowHeight * 2) {
         document.body.style.cursor = 'grabbing'
         document.onselectstart = () => false
@@ -359,6 +365,57 @@ export default {
       document.onselectstart = () => null
       document.ondragstart = null
       document.removeEventListener('mousemove', this.dragCanvas)
+
+      if (Date.now() - this.stepTime > 10) {
+        return
+      }
+
+      let xMax = this.animationStepX * 60
+      let yMax = this.animationStepY * 60
+
+      let x = this.animationStepX
+      let y = this.animationStepY
+
+      let offsetX = 0
+      let offsetY = 0
+
+      let animationMove = () => {
+        let oldX = offsetX
+        let oldY = offsetY
+
+        offsetX = this.quinticOut(this.animationStepX / xMax)
+        offsetY = this.quinticOut(this.animationStepY / yMax)
+
+        this.animationStepX += x
+        this.animationStepY += y
+
+        let left = this.$refs.scrollX.scrollLeft
+        let top = this.$refs.scrollX.scrollTop
+
+        this.$refs.scrollX.scrollLeft -= (offsetX - oldX) * xMax
+        this.$refs.scrollY.scrollTop -= (offsetY - oldY) * yMax
+
+        if (left === this.$refs.scrollX.scrollLeft && top === this.$refs.scrollY.scrollTop) {
+          return
+        }
+
+        if (this.animationStepX !== xMax || this.animationStepY !== yMax) {
+          this.timer = setTimeout(() => {
+            animationMove()
+          }, 25)
+        }
+      }
+
+      animationMove()
+    },
+    cubicOut(k) {
+      return --k * k * k + 1
+    },
+    circularOut(k) {
+      return Math.sqrt(1 - --k * k)
+    },
+    quinticOut(k) {
+      return --k * k * k * k * k + 1
     },
     // 拖拽
     dragCanvas(e) {
@@ -367,6 +424,10 @@ export default {
 
       let offsetX = x - this.oldDownX
       let offsetY = y - this.oldDownY
+
+      this.animationStepX = offsetX
+      this.animationStepY = offsetY
+      this.stepTime = Date.now()
 
       this.oldDownX = x
       this.oldDownY = y
