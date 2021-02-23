@@ -241,6 +241,7 @@ export default {
       this.calcContentXY()
       this.renderRule()
       this.renderNodes()
+      this.renderFixed()
     },
     changeMeterHandle(e) {
       if (this.preMeterToPx !== e) {

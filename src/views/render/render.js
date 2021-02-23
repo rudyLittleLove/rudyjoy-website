@@ -1138,6 +1138,13 @@ export default {
       // 绘制标尺左右图标
       let x0 = this.colWidth - this.offset + 1
       let y0 = this.ruleHeight - this.offset
+
+      let start = Math.round((Math.abs(this.translateX) / this.ruleStep) * 100) + this.startPileNo
+      let end = Math.round(((Math.abs(this.translateX) + this.wrapWidth - this.colWidth) / this.ruleStep) * 100) + this.startPileNo
+
+      let startPileNo = `K${Math.floor(start / 1000)}+${start % 1000}`
+      let endPileNo = `K${Math.floor(end / 1000)}+${end % 1000}`
+
       ;[x0, this.wrapWidth - this.ruleHeight - this.offset].forEach((v, i) => {
         let xMax = v + this.tipHeight
         let yMax = y0 + this.tipHeight
@@ -1193,7 +1200,8 @@ export default {
         // + 2 垂直偏移量
         this.drawText({
           crd: [v + 40 * ca, y0 + this.tipHeight / 2 + 2],
-          text: ca === 1 ? this.startPileStr : this.endPileStr,
+          // text: ca === 1 ? this.startPileStr : this.endPileStr,
+          text: ca === 1 ? startPileNo : endPileNo,
           fillStyle: this.pileStrColor,
           textAlign: 'start',
           ctx,
