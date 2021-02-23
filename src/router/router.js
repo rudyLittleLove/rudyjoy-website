@@ -87,6 +87,11 @@ export default new Router({
       path: '/getImageColor',
       name: 'getImageColor',
       component: () => import('@/views/getImageColor/index.vue')
+    },
+    {
+      path: '/flipPage',
+      name: 'flipPage',
+      component: () => import('@/views/flipPage/index.vue')
     }
   ]
 })

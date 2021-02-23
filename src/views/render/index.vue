@@ -255,8 +255,8 @@ export default {
       this.$refs.scrollX.scrollLeft = pileNoLength * this.meterToPx
     },
     calcTooltipStyle() {
-      clearTimeout(this.timer)
-      this.timer = setTimeout(() => {
+      clearTimeout(this.timer2)
+      this.timer2 = setTimeout(() => {
         if (!this.current) return {}
         let x = 0
         let y = 0
