@@ -390,7 +390,7 @@ export default {
         this.animationStepY += y
 
         let left = this.$refs.scrollX.scrollLeft
-        let top = this.$refs.scrollX.scrollTop
+        let top = this.$refs.scrollY.scrollTop
 
         this.$refs.scrollX.scrollLeft -= (offsetX - oldX) * xMax
         this.$refs.scrollY.scrollTop -= (offsetY - oldY) * yMax
