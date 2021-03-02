@@ -6,7 +6,7 @@
       el-form-item( label="+" label-width="20px")
         el-input-number( size="small" v-model="filterData.v" controls-position="right" :min="vMin" :max="vMax" :step="1" :precision="1")
       el-button( size="small" type="primary" :disabled="data.length <= 2" @click="locationHandle") 定位
-      el-button( size="small" type="primary" @click="renderAllNodesAndDownload") 下载
+      el-button( size="small" type="primary" @click="renderAllNodesAndDownload") 导出分析图
       el-form-item( label="行高" label-width="80px")
         el-select( v-model="rowHeight" @change="changeRowHeight")
           el-option( v-for="item in rowHegihtOptions" :key="item" :value="item" :label="item")

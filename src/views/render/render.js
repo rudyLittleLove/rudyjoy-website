@@ -1,4 +1,5 @@
 import { addResizeListener, removeResizeListener } from '@/libs/resize-event'
+import { quinticOut } from '@/libs/transitionCurve.js'
 
 export default {
   data() {
@@ -383,8 +384,8 @@ export default {
         let oldX = offsetX
         let oldY = offsetY
 
-        offsetX = this.quinticOut(this.animationStepX / xMax)
-        offsetY = this.quinticOut(this.animationStepY / yMax)
+        offsetX = quinticOut(this.animationStepX / xMax) || 0
+        offsetY = quinticOut(this.animationStepY / yMax) || 0
 
         this.animationStepX += x
         this.animationStepY += y
@@ -407,15 +408,6 @@ export default {
       }
 
       animationMove()
-    },
-    cubicOut(k) {
-      return --k * k * k + 1
-    },
-    circularOut(k) {
-      return Math.sqrt(1 - --k * k)
-    },
-    quinticOut(k) {
-      return --k * k * k * k * k + 1
     },
     // 拖拽
     dragCanvas(e) {
