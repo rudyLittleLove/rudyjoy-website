@@ -1,3 +1,5 @@
+// echarts曲线demo https://echarts.apache.org/examples/zh/editor.html?c=line-easing
+
 export const linear = k => {
   return k
 }
