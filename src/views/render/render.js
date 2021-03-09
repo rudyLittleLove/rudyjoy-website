@@ -1,5 +1,5 @@
 import { addResizeListener, removeResizeListener } from '@/libs/resize-event'
-import { quinticOut } from '@/libs/transitionCurve.js'
+import { quadraticOut } from '@/libs/transitionCurve.js'
 
 export default {
   data() {
@@ -384,8 +384,8 @@ export default {
         let oldX = offsetX
         let oldY = offsetY
 
-        offsetX = quinticOut(this.animationStepX / xMax) || 0
-        offsetY = quinticOut(this.animationStepY / yMax) || 0
+        offsetX = quadraticOut(this.animationStepX / xMax) || 0
+        offsetY = quadraticOut(this.animationStepY / yMax) || 0
 
         this.animationStepX += x
         this.animationStepY += y
@@ -393,13 +393,18 @@ export default {
         let left = this.$refs.scrollX.scrollLeft
         let top = this.$refs.scrollY.scrollTop
 
-        this.$refs.scrollX.scrollLeft -= (offsetX - oldX) * xMax
-        this.$refs.scrollY.scrollTop -= (offsetY - oldY) * yMax
+        let caX = (offsetX - oldX) * xMax
+        let caY = (offsetY - oldY) * yMax
+
+        this.$refs.scrollX.scrollLeft -= caX
+        this.$refs.scrollY.scrollTop -= caY
 
         if (left === this.$refs.scrollX.scrollLeft && top === this.$refs.scrollY.scrollTop) {
           return
         }
-
+        if (caX > -1 && caX < 1 && caY > -1 && caY < 1) {
+          return
+        }
         if (this.animationStepX !== xMax || this.animationStepY !== yMax) {
           this.timer = setTimeout(() => {
             animationMove()
@@ -1184,14 +1189,14 @@ export default {
 
         // 右侧出口桩号 偏移量
         let ext = {}
-        if (ca === -1) {
-          ca = -0.25
+        if (i) {
+          v += this.ruleHeight
           ext.textAlign = 'right'
         }
 
         // + 2 垂直偏移量
         this.drawText({
-          crd: [v + 40 * ca, y0 + this.tipHeight / 2 + 2],
+          crd: [v + (this.ruleHeight + 10) * ca, y0 + this.tipHeight / 2 + 2],
           // text: ca === 1 ? this.startPileStr : this.endPileStr,
           text: ca === 1 ? startPileNo : endPileNo,
           fillStyle: this.pileStrColor,
