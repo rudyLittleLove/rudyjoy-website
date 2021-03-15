@@ -26,6 +26,8 @@
         li( v-for="(item, i) in formData.checked" :key="i" @click="formData.checked.splice(i, 1)") {{dishesObj[item].name}}
           span ￥{{dishesObj[item].price}}
       .box
+        p 桌数
+          span {{formData.tableNumber}} 桌
         p 每桌金额
           span ￥{{total}}
         p 已点菜品金额 
@@ -35,10 +37,10 @@
 </template>
 
 <script>
-import dishes from "./dishes";
+import dishes from './dishes'
 
 export default {
-  name: "Dishes",
+  name: 'Dishes',
   data() {
     return {
       dishes: [],
@@ -50,45 +52,42 @@ export default {
         checked: []
       },
       dishesObj: {}
-    };
+    }
   },
   computed: {
     count() {
-      return (
-        this.formData.peopleNumber *
-        (this.formData.price - this.formData.peoplePrice)
-      );
+      return this.formData.peopleNumber * (this.formData.price - this.formData.peoplePrice)
     },
     total() {
-      return this.count / this.formData.tableNumber;
+      return this.count / this.formData.tableNumber
     },
     totaled() {
       let arr = this.formData.checked.map(item => {
-        return this.dishesObj[item].price;
-      });
+        return this.dishesObj[item].price
+      })
 
-      arr.push(0, 0);
+      arr.push(0, 0)
 
-      return arr.reduce((a, b) => +a + +b);
+      return arr.reduce((a, b) => +a + +b)
     },
     balance() {
-      return this.total - this.totaled;
+      return this.total - this.totaled
     }
   },
   created() {
     this.dishes = dishes.map(item => {
-      item.children.sort((a, b) => (a.price >>> 0) - (b.price >>> 0));
+      item.children.sort((a, b) => (a.price >>> 0) - (b.price >>> 0))
 
       item.children.map(v => {
-        v.id = (Math.random() * Math.pow(10, 10)) >>> 0;
-        this.dishesObj[v.id] = v;
-        return v;
-      });
-      return item;
-    });
+        v.id = (Math.random() * Math.pow(10, 10)) >>> 0
+        this.dishesObj[v.id] = v
+        return v
+      })
+      return item
+    })
   },
   methods: {}
-};
+}
 </script>
 
 <style lang="css">
@@ -143,7 +142,7 @@ export default {
       padding 5px
       text-align center
     ul
-      height calc(100% - 50px)
+      height calc(100% - 80px)
       overflow auto
     li
       font-size 14px
