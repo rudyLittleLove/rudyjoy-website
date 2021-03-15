@@ -3,13 +3,13 @@
     h1 土家菜馆菜单
     el-form( :model="formData" inline size="mini")
       el-form-item( label="人数")
-        el-input( v-model="formData.peopleNumber")
+        el-input-number( v-model="formData.peopleNumber" controls-position="right")
       el-form-item( label="桌数")
-        el-input( v-model="formData.tableNumber")
+        el-input-number( v-model="formData.tableNumber" controls-position="right")
       el-form-item( label="单价")
-        el-input( v-model="formData.price")
+        el-input-number( v-model="formData.price" controls-position="right")
       el-form-item( label="餐位费")
-        el-input( v-model="formData.peoplePrice")
+        el-input-number( v-model="formData.peoplePrice" controls-position="right")
       span.item 总金额 ￥{{count}}
       span.item 每桌金额 ￥{{total }}
     el-checkbox-group( v-model="formData.checked")
@@ -107,6 +107,8 @@ export default {
     margin-top 15px
     >>> .el-form-item__content
       width 100px
+      .el-input-number--mini
+        width 100px
     .item
       font-size 14px
       line-height 28px
