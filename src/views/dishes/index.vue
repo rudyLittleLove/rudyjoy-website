@@ -74,17 +74,28 @@ export default {
       return this.total - this.totaled
     }
   },
+  watch: {
+    formData: {
+      handler(val) {
+        localStorage.setItem('dishes', JSON.stringify(val))
+      },
+      deep: true
+    }
+  },
   created() {
     this.dishes = dishes.map(item => {
       item.children.sort((a, b) => (a.price >>> 0) - (b.price >>> 0))
 
       item.children.map(v => {
-        v.id = (Math.random() * Math.pow(10, 10)) >>> 0
+        v.id = v.name + v.price
         this.dishesObj[v.id] = v
         return v
       })
       return item
     })
+
+    let value = localStorage.getItem('dishes')
+    value ? (this.formData = JSON.parse(value)) : ''
   },
   methods: {}
 }
