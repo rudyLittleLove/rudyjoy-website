@@ -97,6 +97,11 @@ export default new Router({
       path: '/drawRect',
       name: 'drawRect',
       component: () => import('@/views/drawRect/index.vue')
+    },
+    {
+      path: '/compressImage',
+      name: 'compressImage',
+      component: () => import('@/views/compressImage/index.vue')
     }
   ]
 })

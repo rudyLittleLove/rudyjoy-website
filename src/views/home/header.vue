@@ -155,6 +155,10 @@ export default {
             {
               label: 'drawRect',
               routeName: 'drawRect'
+            },
+            {
+              label: 'compressImage',
+              routeName: 'compressImage'
             }
           ]
         }
