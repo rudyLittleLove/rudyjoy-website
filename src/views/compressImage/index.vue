@@ -23,10 +23,10 @@
       el-form-item( label="图片高度")
         el-input( v-model="height" placeholder="请输入合理像素数值")
         div 不合理值将使用图片默认高度
-    div( style="clear: both;")
+    div( style="clear: both; color: #000000; ") 点击图片查看，左右切换对比原图
     ul( class="img-item-ul")
       li( v-for="(item,i) in compressImageList" :key="i" class="img-item")
-        el-image( :src="item.url" :preview-src-list="[item.url]")
+        el-image( :src="item.url" :preview-src-list="[item.url, fileList[i].url]")
         div.info-text 原始大小：
           span {{item.originSize}}
         div.info-text 压缩质量：
