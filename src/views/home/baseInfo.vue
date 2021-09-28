@@ -1,24 +1,53 @@
 <template lang="pug">
   .base-info
-    h1 Mr·zhou 的小破站
+    h1 多一点点爱的小破站
     .line
-    p 弄了一些特效，然后在其他页面放一些自己做过的一些东西，以及为了搜索整理的一大堆游戏数据。
-    p 说一下做的这个页面吧，对，就是这个首页的样式。说实在对，对于我来说，如果你给我一个UI图，我能很快，并且精度很高的还原。但当我自己设计的时候，就是一件很烧脑的事了，做一个中规中矩的菜单可能都不需要设计。但想要做一个个性化的菜单，就足够我忙活了。
-    p 删删改改多次，最后就确定这样了，虽说自己Photoshop玩的也还不错，但是会Photoshop和设计是两码事。
-    p 以前暑假兼职美工的时候，多数都是参照其他店铺的同类产品，再稍加改动就能做好主图、详情图、banner图等。
-    p 谈谈页面的优化吧
-    p 最明显的就是加了Gzip压缩吧，主流浏览器都支持解析.gz这个格式的压缩文件。只需要前端打包创建好压缩文件，后端配置浏览器支持解析的就返回这种压缩格式文件，这样就能极大缩减加载文件时间了。
-    P 还有就是背景图用photoshop 导出了web格式的压缩类型，1920*1080大小图片的最后也才36.5kb。
-    p 最 low 的一个优化就是因为菜单用了迷你简菱心字体，这个字体文件原本接近2M，为了缩小大小就把header中所有用到的文字，通过字体编辑软件一个一个的添加到新创建的字体文件中，最后这个字体文件最大的一种格式也才50kb。
-    p 好了，最后稍稍介绍一下自己。
-    p 一个前端（对，就是这么简洁）
-    p 本站目前都是前端页面，准备是用node.js 做后端，之前也用过node.js 开发，不过部署都是后端同事在干，自己还没弄过，得学学了。
-    P 还有，本站是响应式的哦！不信？你拖动窗口大小看看，或者切换到手机或电脑看。
-    p 其实IE也是支持的，不过用了elementUI，其中的el-image 组件的懒加载IE不支持，我找了一下发现是elementUI的bug，已经在element这个开源项目上提了issuse 和 Pull request，不知道什么下个版本能不能修复。
-    p 还有个问题就是因为 IE不支持 object-fit 样式，用了其他hack样式，在.el-image 这个className上用非固定高度（min-height、max-height），hack的样式就会失效，有兴趣的同学可以去尝试一下。
-    P 果然是人开发的就有bugヽ(￣▽￣)ﾉ
-    p 2020-04-23 更新
-    p 注：添加jenkins 自动部署更改
+    p 本站纯个人开发学习
+    p 整体样式由站主个人设计，暂无后台（准备使用nodeJs做后台服务）。
+    p 
+      span 网站主要存放了一些站主发布的
+      el-link( type="primary" href="http://127.0.0.1:8080/blogs" ) 博客信息
+      span 、小工具
+      span (
+      el-link( type="primary" href="http://114.55.39.43/getImageColor" ) 图片颜色获取
+      span 、
+      el-link( type="primary" href="http://127.0.0.1:8080/render" ) canvas 绘制进度分析图
+      span 、
+      el-link( type="primary" href="http://127.0.0.1:8080/drawRect" ) canvas 绘制基础交互
+      span 、
+      el-link( type="primary" href=" http://127.0.0.1:8080/compressImage" ) 图片压缩
+      span 等) 、插件、游戏资料数据攻略等，也归纳了一些站住常用的社交学习分享网站，比如
+      el-link( type="primary" href="https://blog.csdn.net/rudy_zhou" target="_blank") CSDN
+      span 、
+      el-link( type="primary" href="https://juejin.im/user/5e01e88f6fb9a0164b4ef199" target="_blank") 掘金
+      span 博客网站，个人
+      el-link( type="primary" href="https://github.com/rudyLittleLove" target="_blank") github
+      span ，
+      el-link( type="primary" href="https://stackoverflow.com/users/12598378/%e5%a4%9a%e4%b8%80%e7%82%b9%e7%82%b9%e7%88%b1" target="_blank") Stack Overflow
+      span （较为活跃的一个外网网站，访问较慢，某些js资源等链接只能翻墙才能获取）等。
+    p 
+    p 
+      span 为了高效部署访问（服务器较差，带宽较差，毕竟是个人学习网站）使用了
+      el-link( type="primary" href="http://114.55.39.43:8080/" target="_blank") jenkins 
+      span 自动部署的方式。
+    p 同时 nginx 配置Gzip压缩（访问量较小，服务器没啥压力），也考虑后续不使用nginx，前端也在打包时添加了Gzip 压缩，后续根据具体使用的 服务工具配置返回压缩格式文件，降低带宽压力。
+    p 页面的优化
+    P 背景图压缩，1920*1080大小图片的最后也才36.5kb。
+    p 个性化字体文件压缩（比较low的方式，取出菜单使用到的个性化字体《迷你简菱心》，放入新增字体中）。
+    p 路由异步加载，根据访问路径单独加载页面。
+    p 页面交互
+    P 本站是响应式的，网站主体支持移动端、PC端展示等。
+    p 个人介绍
+    p 站主从事前端工作近五年时间（2017-2月至今），最初使用jQuery 、artTemplate、bootstrap等，中间逐渐转移至Vue、Vue-router、ElementUI、iview 等开发，现在也使用React、antd 开发过一个钉钉H5部门流程管理。
+    p 主要开发交互复杂的后台管理平台，包含流程管理、Canvas绘制施工进度交互、大屏特效展示、大型数据表单交互等功能。
+    p 也开发过原生小程序 
+      el-link( type="success") 移动云计费器
+      |（微信搜索资费计算），
+      el-link( type="success") 云综漫步
+      |（一个江苏移动内部综合管理小程序）。在开源基础上开发过 
+      el-link( type="success") 爱好文具订制品
+      | 等。
+    p 写过插件，参与过开源项目iview bug维护，常写博客分享技术。
 </template>
 
 <style lang="stylus" scoped>
@@ -39,7 +68,10 @@
     margin 20px auto
     width 800px
     max-width 95%
-    font-size 14px
+    font-size 15px
+    span,
+    a
+      vertical-align bottom
 @media screen and (max-width 900px)
   .base-info
     > h1

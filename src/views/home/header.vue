@@ -60,58 +60,64 @@ export default {
               label: 'Stack Overflow',
               href: 'https://stackoverflow.com/users/12598378/%e5%a4%9a%e4%b8%80%e7%82%b9%e7%82%b9%e7%88%b1',
               fontSize: '14px'
+            },
+            {
+              label: 'JSRUN',
+              href: 'https://jsrun.net/u/rudylittlelove'
+              // fontSize: '14px'
+            },
+            {
+              label: 'MAKEAPIE',
+              href: 'https://www.makeapie.com/user.html?u=obd-o2SdpVu0xEEq5kDTO4FCDMKLB-xKSBD&type=work'
             }
           ]
         },
-        {
-          label: '武器库',
-          children: [
-            {
-              label: 'HTML&CSS'
-            },
-            {
-              label: 'JavaScript'
-            },
-            {
-              label: 'Vue'
-            },
-            {
-              label: 'jQuery'
-            },
-            {
-              label: 'echarts'
-            },
-            {
-              label: 'node.js'
-            },
-            {
-              label: 'CSS3'
-            },
-            {
-              label: 'canvas'
-            }
-          ]
-        },
-        {
-          label: '工具库',
-          children: [
-            {
-              label: 'Photoshop'
-            },
-            {
-              label: 'webstorm'
-            },
-            {
-              label: 'vscode'
-            },
-            {
-              label: 'Illustrator'
-            },
-            {
-              label: 'maya'
-            }
-          ]
-        },
+        // {
+        //   label: '武器库',
+        //   children: [
+        //     {
+        //       label: 'HTML&CSS'
+        //     },
+        //     {
+        //       label: 'JavaScript'
+        //     },
+        //     {
+        //       label: 'Vue'
+        //     },
+        //     {
+        //       label: 'jQuery'
+        //     },
+        //     {
+        //       label: 'echarts'
+        //     },
+        //     {
+        //       label: 'node.js'
+        //     },
+        //     {
+        //       label: 'CSS3'
+        //     },
+        //     {
+        //       label: 'canvas'
+        //     }
+        //   ]
+        // },
+        // {
+        //   label: '工具库',
+        //   children: [
+        //     {
+        //       label: 'Photoshop'
+        //     },
+        //     {
+        //       label: 'webstorm'
+        //     },
+        //     {
+        //       label: 'vscode'
+        //     },
+        //     {
+        //       label: 'Illustrator'
+        //     }
+        //   ]
+        // },
         {
           label: '游戏库',
           children: [
