@@ -6,16 +6,16 @@
     p 整体样式由站主个人设计，暂无后台（准备使用nodeJs做后台服务）。
     p 
       span 网站主要存放了一些站主发布的
-      el-link( type="primary" href="http://127.0.0.1:8080/blogs" ) 博客信息
+      el-link( type="primary" href="http://114.55.39.43/blogs" ) 博客信息
       span 、小工具
       span (
       el-link( type="primary" href="http://114.55.39.43/getImageColor" ) 图片颜色获取
       span 、
-      el-link( type="primary" href="http://127.0.0.1:8080/render" ) canvas 绘制进度分析图
+      el-link( type="primary" href="http://114.55.39.43/render" ) canvas 绘制进度分析图
       span 、
-      el-link( type="primary" href="http://127.0.0.1:8080/drawRect" ) canvas 绘制基础交互
+      el-link( type="primary" href="http://114.55.39.43/drawRect" ) canvas 绘制基础交互
       span 、
-      el-link( type="primary" href=" http://127.0.0.1:8080/compressImage" ) 图片压缩
+      el-link( type="primary" href=" http://114.55.39.43/compressImage" ) 图片压缩
       span 等) 、插件、游戏资料数据攻略等，也归纳了一些站住常用的社交学习分享网站，比如
       el-link( type="primary" href="https://blog.csdn.net/rudy_zhou" target="_blank") CSDN
       span 、
