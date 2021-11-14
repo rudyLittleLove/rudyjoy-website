@@ -279,7 +279,7 @@ export default {
       line-height: 60px;
       width: 16px;
       box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-      top: calc(~'50% - 30px');
+      top: calc(50% - 30px);
       background-color: #ffffff;
       border-radius: 0 5px 5px 0;
     }
@@ -350,7 +350,7 @@ export default {
     z-index: 7;
     top: 50px;
     right: 10px;
-    max-height: calc(~'100% - 70px');
+    max-height: calc(100% - 70px);
     overflow: auto;
   }
 }
