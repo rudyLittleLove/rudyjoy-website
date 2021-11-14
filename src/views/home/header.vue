@@ -165,6 +165,10 @@ export default {
             {
               label: 'compressImage',
               routeName: 'compressImage'
+            },
+            {
+              label: 'coordinate',
+              routeName: 'xyz'
             }
           ]
         }

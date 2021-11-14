@@ -102,6 +102,11 @@ export default new Router({
       path: '/compressImage',
       name: 'compressImage',
       component: () => import('@/views/compressImage/index.vue')
+    },
+    {
+      path: '/xyz',
+      name: 'xyz',
+      component: () => import('@/views/xyz/Index.vue')
     }
   ]
 })
