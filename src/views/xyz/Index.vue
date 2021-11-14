@@ -174,7 +174,7 @@ export default {
             autoFitView: true // 是否自动调整地图视野使绘制的 Marker点都处于视口的可见范围
           })
 
-          this.placeSearch.on('markerClick', params => {
+          this.placeSearch.on('markerClick', () => {
             this.aMap.setZoom(15)
           })
 
@@ -191,7 +191,7 @@ export default {
           console.log(e)
         })
     },
-    renderLine(h) {
+    renderLine() {
       this.$refs.form.validate(valid => {
         if (valid) {
           this.isLoading = true
@@ -232,7 +232,7 @@ export default {
             console.log(this.formData.result)
           })
 
-          this.route.on('addway', ({ type, lnglat, target }) => {
+          this.route.on('addway', ({ target }) => {
             this.active = -1
             this.formData.coordinates = target._path.map(v => `${v.lng},${v.lat}`)
           })
