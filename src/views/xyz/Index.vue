@@ -9,7 +9,8 @@
           el-input( type="text" v-model="formData.keyword" @keyup.native.enter="posSearchHandle" placeholder="请输入位置" clearable @on-clear="clearHandle")
           el-button( icon="el-icon-search" type="primary" @click="posSearchHandle")
         el-form-item( :label="`经纬度${i+1}`" v-for="(item, i) in formData.coordinates" :key="i" :rules="rules.coordinate" :prop="`coordinates.${i}`")
-          el-input( type="text" v-model="formData.coordinates[i]" icon="md-navigate" placeholder="请输入经纬度" @focus="activeHandle(i)" :class="{active: active === i}")
+          el-input( type="text" v-model="formData.coordinates[i]" icon="md-navigate" placeholder="请输入经纬度" :class="{active: active === i}")
+            i( slot="suffix" class="el-input__icon el-icon-s-promotion" @click="activeHandle(i)")
           el-button( icon="el-icon-close" type="danger" v-if="formData.coordinates.length > 2" @click="removePointHandle(i)")
           el-button( icon="el-icon-plus" type="primary" v-if="formData.coordinates.length < 15" @click="formData.coordinates.splice(i + 1, 0, ''); active = i+1")
         //- el-form-item( label="经纬度")
@@ -299,6 +300,16 @@ export default {
     .el-form-item {
       margin-bottom: 20px;
       padding-right: 10px;
+      .el-input {
+        &.active {
+          /deep/ .el-icon-s-promotion {
+            color #409eff;
+          }
+        }
+      }
+      /deep/ .el-icon-s-promotion {
+        cursor: pointer;
+      }
       /deep/ .el-form-item-error-tip {
         position: static;
       }
@@ -307,26 +318,6 @@ export default {
       }
       .el-button {
         margin-left: 3px;
-      }
-      .el-input-wrapper {
-        width: 200px;
-        &.el-input-type-textarea {
-          width: 270px;
-        }
-        &.active {
-          /deep/ input {
-            box-shadow: 0 0 3px #2d8cf0;
-          }
-          /deep/ .el-icon {
-            color: #2d8cf0;
-          }
-        }
-        /deep/ .el-icon {
-          cursor: pointer;
-        }
-        & + .el-input-wrapper {
-          margin-left: 5px;
-        }
       }
       // /deep/ textarea {
       //   width: 250px;
