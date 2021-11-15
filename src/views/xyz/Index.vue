@@ -6,7 +6,7 @@
       el-form( :model="formData" ref="form" size="small" label-width="100" class="custom-scrollbar")
         el-form-item( label="选择定位位置")
           //- el-input( type="text" v-model="formData.keyword" placeholder="请输入位置")
-          el-input( type="text" v-model="formData.keyword" @keyup.native.enter="posSearchHandle" placeholder="请输入位置" clearable @on-clear="clearHandle")
+          el-input( type="text" v-model="formData.keyword" @keyup.native.enter="posSearchHandle" placeholder="请输入位置" clearable @clear="clearHandle")
           el-button( icon="el-icon-search" type="primary" @click="posSearchHandle")
         el-form-item( :label="`经纬度${i+1}`" v-for="(item, i) in formData.coordinates" :key="i" :rules="rules.coordinate" :prop="`coordinates.${i}`")
           el-input( type="text" v-model="formData.coordinates[i]" icon="md-navigate" placeholder="请输入经纬度" :class="{active: active === i}")
@@ -25,7 +25,7 @@
         p 可在控制台查看完整路线对象
     .style-change
       span 地图主题：
-      el-select( v-model="formData.style" @on-change="setMapStyle")
+      el-select( v-model="formData.style" @change="setMapStyle")
         el-option( v-for="(item, i) in styleOptions" :label="item.label" :value="item.value")
     .search-result.custom-scrollbar( id="search-result" ref="searchResult")
     div.coordinate-acquisition( id="coordinate-acquisition" :class="{active: active !== -1}")
