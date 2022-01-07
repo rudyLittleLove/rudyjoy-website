@@ -107,6 +107,16 @@ export default new Router({
       path: '/xyz',
       name: 'xyz',
       component: () => import('@/views/xyz/Index.vue')
+    },
+    {
+      path: '/xyz',
+      name: 'xyz',
+      component: () => import('@/views/xyz/Index.vue')
+    },
+    {
+      path: '/yukangma',
+      name: 'yukangma',
+      component: () => import('@/views/yukangma/Index.vue')
     }
   ]
 })
