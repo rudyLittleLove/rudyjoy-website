@@ -11,10 +11,10 @@
 export default {
   data() {
     return {
-      active: 1
+      active: 1,
     }
   },
-  methods: {}
+  methods: {},
 }
 </script>
 
@@ -28,10 +28,10 @@ export default {
   position: relative;
   .button-map {
     width: 100%;
-    height: 50px;
+    height: 150px;
     // box-shadow: 0 0 3px orange;
     position: absolute;
-    bottom: 10%;
+    bottom: 0%;
   }
   .second {
     position: absolute;
