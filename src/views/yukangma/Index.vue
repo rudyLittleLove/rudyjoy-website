@@ -14,9 +14,6 @@ export default {
       active: 1,
     }
   },
-  created() {
-    window?.asdf
-  },
   methods: {},
 }
 </script>
